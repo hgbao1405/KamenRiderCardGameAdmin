@@ -1,0 +1,350 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Asp.net\\KamenRiderCardGame\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1CEA78-1D45-4BF9-97E4-7A6F78153464}|KamenRiderService\\KamenRiderCardGame.csproj|c:\\asp.net\\kamenridercardgame\\kamenriderservice\\controllers\\characterscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1CEA78-1D45-4BF9-97E4-7A6F78153464}|KamenRiderService\\KamenRiderCardGame.csproj|solutionrelative:kamenriderservice\\controllers\\characterscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1CEA78-1D45-4BF9-97E4-7A6F78153464}|KamenRiderService\\KamenRiderCardGame.csproj|c:\\asp.net\\kamenridercardgame\\kamenriderservice\\data\\kamenridercardgamecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1CEA78-1D45-4BF9-97E4-7A6F78153464}|KamenRiderService\\KamenRiderCardGame.csproj|solutionrelative:kamenriderservice\\data\\kamenridercardgamecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1CEA78-1D45-4BF9-97E4-7A6F78153464}|KamenRiderService\\KamenRiderCardGame.csproj|c:\\asp.net\\kamenridercardgame\\kamenriderservice\\kamenridercardgame.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8D1CEA78-1D45-4BF9-97E4-7A6F78153464}|KamenRiderService\\KamenRiderCardGame.csproj|solutionrelative:kamenriderservice\\kamenridercardgame.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1CEA78-1D45-4BF9-97E4-7A6F78153464}|KamenRiderService\\KamenRiderCardGame.csproj|c:\\asp.net\\kamenridercardgame\\kamenriderservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D1CEA78-1D45-4BF9-97E4-7A6F78153464}|KamenRiderService\\KamenRiderCardGame.csproj|solutionrelative:kamenriderservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{875394AD-C92B-46E7-98A4-E57E694968AD}|kamenridercardgame-client\\kamenridercardgame-client.esproj|c:\\asp.net\\kamenridercardgame\\kamenridercardgame-client\\kamenridercardgame-client.esproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{875394AD-C92B-46E7-98A4-E57E694968AD}|kamenridercardgame-client\\kamenridercardgame-client.esproj|solutionrelative:kamenridercardgame-client\\kamenridercardgame-client.esproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D1CEA78-1D45-4BF9-97E4-7A6F78153464}|KamenRiderService\\KamenRiderCardGame.csproj|c:\\asp.net\\kamenridercardgame\\kamenriderservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8D1CEA78-1D45-4BF9-97E4-7A6F78153464}|KamenRiderService\\KamenRiderCardGame.csproj|solutionrelative:kamenriderservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{875394AD-C92B-46E7-98A4-E57E694968AD}|kamenridercardgame-client\\kamenridercardgame-client.esproj|c:\\asp.net\\kamenridercardgame\\kamenridercardgame-client\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{875394AD-C92B-46E7-98A4-E57E694968AD}|kamenridercardgame-client\\kamenridercardgame-client.esproj|solutionrelative:kamenridercardgame-client\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Asp.net\\KamenRiderCardGame\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{875394AD-C92B-46E7-98A4-E57E694968AD}|kamenridercardgame-client\\kamenridercardgame-client.esproj|c:\\asp.net\\kamenridercardgame\\kamenridercardgame-client\\src\\app.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{875394AD-C92B-46E7-98A4-E57E694968AD}|kamenridercardgame-client\\kamenridercardgame-client.esproj|solutionrelative:kamenridercardgame-client\\src\\app.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\asp.net\\sharedresource\\hubs\\loghub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\asp.net\\sharedresource\\models\\managementobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\asp.net\\sharedresource\\middleware\\loggingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Asp.net\\KamenRiderCardGame\\Controllers\\CharactersController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\CharactersController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\asp.net\\sharedresource\\service\\kamenriderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Asp.net\\KamenRiderCardGame\\Models\\Character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Asp.net\\KamenRiderCardGame\\Data\\KamenRiderCardGameContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\KamenRiderCardGameContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Asp.net\\KamenRiderCardGame\\Migrations\\20240921155253_update-character-seeding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20240921155253_update-character-seeding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\asp.net\\sharedresource\\interface\\ikamenriderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|c:\\asp.net\\sharedresource\\models\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Asp.net\\KamenRiderCardGame\\Migrations\\20240921085645_init-Character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20240921085645_init-Character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Asp.net\\KamenRiderCardGame\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CharactersController.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\Controllers\\CharactersController.cs",
+              "RelativeDocumentMoniker": "KamenRiderService\\Controllers\\CharactersController.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\Controllers\\CharactersController.cs",
+              "RelativeToolTip": "KamenRiderService\\Controllers\\CharactersController.cs",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAQwKcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T12:16:23.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "KamenRiderCardGameContext.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\Data\\KamenRiderCardGameContext.cs",
+              "RelativeDocumentMoniker": "KamenRiderService\\Data\\KamenRiderCardGameContext.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\Data\\KamenRiderCardGameContext.cs",
+              "RelativeToolTip": "KamenRiderService\\Data\\KamenRiderCardGameContext.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T04:28:12.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "KamenRiderCardGame.csproj",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\KamenRiderCardGame.csproj",
+              "RelativeDocumentMoniker": "KamenRiderService\\KamenRiderCardGame.csproj",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\KamenRiderCardGame.csproj",
+              "RelativeToolTip": "KamenRiderService\\KamenRiderCardGame.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-09-23T09:41:43.179Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\kamenridercardgame-client\\package.json",
+              "RelativeDocumentMoniker": "kamenridercardgame-client\\package.json",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\kamenridercardgame-client\\package.json",
+              "RelativeToolTip": "kamenridercardgame-client\\package.json",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAC0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-22T06:14:38.916Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LogHub.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Hubs\\LogHub.cs",
+              "RelativeDocumentMoniker": "SharedResource\\Hubs\\LogHub.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Hubs\\LogHub.cs",
+              "RelativeToolTip": "SharedResource\\Hubs\\LogHub.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T16:20:18.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ManagementObject.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Models\\ManagementObject.cs",
+              "RelativeDocumentMoniker": "SharedResource\\Models\\ManagementObject.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Models\\ManagementObject.cs",
+              "RelativeToolTip": "SharedResource\\Models\\ManagementObject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T11:14:16.951Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T12:20:18.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "kamenridercardgame-client.esproj",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\kamenridercardgame-client\\kamenridercardgame-client.esproj",
+              "RelativeDocumentMoniker": "kamenridercardgame-client\\kamenridercardgame-client.esproj",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\kamenridercardgame-client\\kamenridercardgame-client.esproj",
+              "RelativeToolTip": "kamenridercardgame-client\\kamenridercardgame-client.esproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-09-22T06:24:05.012Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\Program.cs",
+              "RelativeDocumentMoniker": "KamenRiderService\\Program.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\Program.cs",
+              "RelativeToolTip": "KamenRiderService\\Program.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwCIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-23T09:48:53.34Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "KamenRiderService\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\Properties\\launchSettings.json",
+              "RelativeToolTip": "KamenRiderService\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-23T11:34:50.004Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "App.tsx",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\kamenridercardgame-client\\src\\App.tsx",
+              "RelativeDocumentMoniker": "kamenridercardgame-client\\src\\App.tsx",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\kamenridercardgame-client\\src\\App.tsx",
+              "RelativeToolTip": "kamenridercardgame-client\\src\\App.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2024-09-22T06:18:43.145Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LoggingMiddleware.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Middleware\\LoggingMiddleware.cs",
+              "RelativeDocumentMoniker": "SharedResource\\Middleware\\LoggingMiddleware.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Middleware\\LoggingMiddleware.cs",
+              "RelativeToolTip": "SharedResource\\Middleware\\LoggingMiddleware.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAABBwBQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T12:14:11.987Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CharactersController.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\Controllers\\CharactersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CharactersController.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\Controllers\\CharactersController.cs",
+              "RelativeToolTip": "Controllers\\CharactersController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAABBwCQAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T12:23:03.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "KamenRiderService.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Service\\KamenRiderService.cs",
+              "RelativeDocumentMoniker": "SharedResource\\Service\\KamenRiderService.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Service\\KamenRiderService.cs",
+              "RelativeToolTip": "SharedResource\\Service\\KamenRiderService.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAYwBYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T12:53:04.227Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Character.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\Models\\Character.cs",
+              "RelativeDocumentMoniker": "Models\\Character.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\Models\\Character.cs",
+              "RelativeToolTip": "Models\\Character.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T08:42:39.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "KamenRiderCardGameContext.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\Data\\KamenRiderCardGameContext.cs",
+              "RelativeDocumentMoniker": "Data\\KamenRiderCardGameContext.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\Data\\KamenRiderCardGameContext.cs",
+              "RelativeToolTip": "Data\\KamenRiderCardGameContext.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAABBwCQAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T15:25:35.111Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "20240921155253_update-character-seeding.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\Migrations\\20240921155253_update-character-seeding.cs",
+              "RelativeDocumentMoniker": "Migrations\\20240921155253_update-character-seeding.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\Migrations\\20240921155253_update-character-seeding.cs",
+              "RelativeToolTip": "Migrations\\20240921155253_update-character-seeding.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAABBwBcAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T15:52:53.574Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IKamenRiderService.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Interface\\IKamenRiderService.cs",
+              "RelativeDocumentMoniker": "SharedResource\\Interface\\IKamenRiderService.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Interface\\IKamenRiderService.cs",
+              "RelativeToolTip": "SharedResource\\Interface\\IKamenRiderService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T13:35:08.539Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Character.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Models\\Character.cs",
+              "RelativeDocumentMoniker": "SharedResource\\Models\\Character.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\SharedResource\\Models\\Character.cs",
+              "RelativeToolTip": "SharedResource\\Models\\Character.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T12:55:35.805Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "20240921085645_init-Character.cs",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\Migrations\\20240921085645_init-Character.cs",
+              "RelativeDocumentMoniker": "Migrations\\20240921085645_init-Character.cs",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\Migrations\\20240921085645_init-Character.cs",
+              "RelativeToolTip": "Migrations\\20240921085645_init-Character.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAABBwBsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-21T08:56:45.918Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Asp.net\\KamenRiderCardGame\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Asp.net\\KamenRiderCardGame\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-21T08:57:11.847Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+@KamenRiderCardGame_HostAddress = http://localhost:5036
+
+GET {{KamenRiderCardGame_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

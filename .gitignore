@@ -128,3 +128,104 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Thư mục dựng (build)
+bin/
+obj/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Tệp nhị phân, nhật ký, tệp tạm thời, v.v.
+*.log
+*.swp
+*.tmp
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.localhistory
+
+# Visual Studio Code
+.vscode/
+
+# VS Code - Thư mục mặc định cho hệ điều hành Linux/MacOS
+.vscode/
+*.code-workspace
+
+# VS Code - Workspace - tệp được sử dụng để lưu giữ các phiên làm việc
+.code-workspace
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Bower
+bower_components/
+
+# Thư mục NPM
+node_modules/
+
+# Tệp tạm thời từ hệ điều hành
+*.pid
+
+# Các tệp được tạo tự động bởi Visual Studio
+.vs/
+*.csproj.user
+*.sln.docstates
+*.suo
+*.csproj.FileListAbsolute.txt
+*.ncrunchsolution
+*.crunchsolution
+
+# Thư mục publish
+PublishScripts/
+publish/
+wwwroot/
+
+# Configurations
+appsettings*.json
+
+# Dịch vụ ẩn danh (ẩn thông tin đăng nhập)
+.vscode/launch.json
+
+# Entity Framework Core Migration files
+**/Migrations/
+
+# StyleCop code analysis
+StyleCopCache*
+
+# Microsoft Azure
+# Xem http://msdn.microsoft.com/en-us/library/windowsazure/ff683672.aspx
+csx/
+*.build.csdef
+
+# Resharper
+_ReSharper*/
+*.[rR]e[Ss]harper
+*.DotSettings.user
+
+# TeamCity
+_TeamCity*
+
+# Thư mục tạm của Rider
+.idea/
+
+# Các tệp gói
+*.nupkg
+*.snupkg
+
+# Các khóa, tệp bảo mật
+*.pfx
+*.key
+
+# Tệp tự động khác
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+

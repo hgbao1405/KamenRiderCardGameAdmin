@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <PackageJsonName Condition="$(PackageJsonName) == ''">kamenridercardgame-client</PackageJsonName>
+    <PackageJsonVersion Condition="$(PackageJsonVersion) == ''">0.1.0</PackageJsonVersion>
+    <PackageJsonPrivate Condition="$(PackageJsonPrivate) == ''">true</PackageJsonPrivate>
+    <PackageJsonDependenciesTestingLibraryJestDom Condition="$(PackageJsonDependenciesTestingLibraryJestDom) == ''">^5.17.0</PackageJsonDependenciesTestingLibraryJestDom>
+    <PackageJsonDependenciesTestingLibraryReact Condition="$(PackageJsonDependenciesTestingLibraryReact) == ''">^13.4.0</PackageJsonDependenciesTestingLibraryReact>
+    <PackageJsonDependenciesTestingLibraryUserEvent Condition="$(PackageJsonDependenciesTestingLibraryUserEvent) == ''">^13.5.0</PackageJsonDependenciesTestingLibraryUserEvent>
+    <PackageJsonDependenciesTypesJest Condition="$(PackageJsonDependenciesTypesJest) == ''">^27.5.2</PackageJsonDependenciesTypesJest>
+    <PackageJsonDependenciesTypesNode Condition="$(PackageJsonDependenciesTypesNode) == ''">^16.18.108</PackageJsonDependenciesTypesNode>
+    <PackageJsonDependenciesTypesReact Condition="$(PackageJsonDependenciesTypesReact) == ''">^18.3.8</PackageJsonDependenciesTypesReact>
+    <PackageJsonDependenciesTypesReactDom Condition="$(PackageJsonDependenciesTypesReactDom) == ''">^18.3.0</PackageJsonDependenciesTypesReactDom>
+    <PackageJsonDependenciesReact Condition="$(PackageJsonDependenciesReact) == ''">^18.3.1</PackageJsonDependenciesReact>
+    <PackageJsonDependenciesReactDom Condition="$(PackageJsonDependenciesReactDom) == ''">^18.3.1</PackageJsonDependenciesReactDom>
+    <PackageJsonDependenciesReactHotToast Condition="$(PackageJsonDependenciesReactHotToast) == ''">^2.4.1</PackageJsonDependenciesReactHotToast>
+    <PackageJsonDependenciesReactRouterDom Condition="$(PackageJsonDependenciesReactRouterDom) == ''">^6.26.2</PackageJsonDependenciesReactRouterDom>
+    <PackageJsonDependenciesReactScripts Condition="$(PackageJsonDependenciesReactScripts) == ''">5.0.1</PackageJsonDependenciesReactScripts>
+    <PackageJsonDependenciesTypescript Condition="$(PackageJsonDependenciesTypescript) == ''">^4.9.5</PackageJsonDependenciesTypescript>
+    <PackageJsonDependenciesWebVitals Condition="$(PackageJsonDependenciesWebVitals) == ''">^2.1.4</PackageJsonDependenciesWebVitals>
+    <PackageJsonScriptsStart Condition="$(PackageJsonScriptsStart) == ''">react-scripts start</PackageJsonScriptsStart>
+    <PackageJsonScriptsBuild Condition="$(PackageJsonScriptsBuild) == ''">react-scripts build</PackageJsonScriptsBuild>
+    <PackageJsonScriptsTest Condition="$(PackageJsonScriptsTest) == ''">react-scripts test</PackageJsonScriptsTest>
+    <PackageJsonScriptsEject Condition="$(PackageJsonScriptsEject) == ''">react-scripts eject</PackageJsonScriptsEject>
+    <PackageJsonEslintconfigExtends Condition="$(PackageJsonEslintconfigExtends) == ''">[
+  "react-app",
+  "react-app/jest"
+]</PackageJsonEslintconfigExtends>
+    <PackageJsonBrowserslistProduction Condition="$(PackageJsonBrowserslistProduction) == ''">[
+  "\u003E0.2%",
+  "not dead",
+  "not op_mini all"
+]</PackageJsonBrowserslistProduction>
+    <PackageJsonBrowserslistDevelopment Condition="$(PackageJsonBrowserslistDevelopment) == ''">[
+  "last 1 chrome version",
+  "last 1 firefox version",
+  "last 1 safari version"
+]</PackageJsonBrowserslistDevelopment>
+    <PackageJsonDevdependenciesAutoprefixer Condition="$(PackageJsonDevdependenciesAutoprefixer) == ''">^10.4.20</PackageJsonDevdependenciesAutoprefixer>
+    <PackageJsonDevdependenciesPostcss Condition="$(PackageJsonDevdependenciesPostcss) == ''">^8.4.47</PackageJsonDevdependenciesPostcss>
+    <PackageJsonDevdependenciesTailwindcss Condition="$(PackageJsonDevdependenciesTailwindcss) == ''">^3.4.13</PackageJsonDevdependenciesTailwindcss>
+  </PropertyGroup>
+</Project>

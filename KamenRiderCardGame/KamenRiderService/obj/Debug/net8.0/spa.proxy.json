@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:3000",
+"RedirectUrl": "",
+"LaunchCommand": "npm start",
+"WorkingDirectory": "C:\\Asp.net\\KamenRiderCardGame\\KamenRiderService\\..\\kamenridercardgame-client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

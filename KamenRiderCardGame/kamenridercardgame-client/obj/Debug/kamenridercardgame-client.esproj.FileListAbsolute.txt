@@ -1,1 +1,0 @@
-C:\Asp.net\KamenRiderCardGame\kamenridercardgame-client\obj\Debug\kamenridercardgame-client.esproj.CoreCompileInputs.cache

@@ -48,12 +48,13 @@ import MessageService from "./message.service";
 
         // Ki m tra xem c u tr y API c  th nh c ng hay kh ng
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          MessageService.error('Network response was not ok');
+          return Promise.reject('Network response was not ok');
         }
         const data: Character[] = await response.json(); 
         return data;
       } catch (error) {
-        console.error('Error fetching characters:', error);
+        MessageService.error('Error fetching characters:'+ error);
         throw error;
       }
     };
@@ -72,12 +73,14 @@ import MessageService from "./message.service";
           body: JSON.stringify(character), // Convert character object to JSON
         });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          MessageService.error('Network response was not ok');
+          return Promise.reject('Network response was not ok');
         }
         const data: Character = await response.json();
+        MessageService.success('Character added successfully');
         return data;
       } catch (error) {
-        console.error('Error fetching characters:', error);
+        MessageService.error('Error fetching characters:' + error);
         throw error;
       }
     }
@@ -97,7 +100,6 @@ import MessageService from "./message.service";
         }
         return true;
       } catch (error) {
-        console.error('Error fetching characters:', error);
         MessageService.error('Failed to update character:'+error);
         return false;
       }
@@ -109,11 +111,13 @@ import MessageService from "./message.service";
           method: 'DELETE', // Use DELETE method
         });
         if (!response.ok) {
+          MessageService.error('Network response was not ok');
           return false;
         }
+        MessageService.success('Character deleted successfully');
         return true;
       } catch (error) {
-        console.error('Error fetching characters:', error);
+        MessageService.error('Failed to delete character:'+error);
         throw error;
       }
     }

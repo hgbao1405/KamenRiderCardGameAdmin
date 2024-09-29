@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KamenRiderCardGame.Data;
 using GenericFileService.Files;
 using SharedResource.Middleware;
-using SharedResource;
+using SharedResource.Models;
 
 namespace KamenRiderCardGame.Controllers
 {
@@ -18,7 +18,6 @@ namespace KamenRiderCardGame.Controllers
     {
         private readonly KamenRiderCardGameContext _context;
         private readonly ILogger<LoggingMiddleware> _logger;
-
 
         public CharactersController(KamenRiderCardGameContext context, ILogger<LoggingMiddleware> logger)
         {

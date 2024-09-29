@@ -5,15 +5,20 @@ import {CharacterInformation,Button} from '../Character/CharacterInformation';
 import AddCharacterForm from '../AddCharacterForm/AddCharacterForm';
 import MessageService from '../../../../service/message.service';
 import UpdateAvatarForm from '../AddCharacterForm/UploadAvatar';
+import LazyLoad from 'react-lazyload';
 
 interface ShowCharactersProps {}
+
+const LoadingCharacter = () => (
+  <div className="loading border border-gray-500 rounded-lg p-3 mb-3 transition-all duration-300 ease-in-out overflow-hidden hover:h-auto">
+  </div>
+)
 
 const ShowCharacters: FC<ShowCharactersProps> = () => {
   
   const [characters, setCharacters] = useState<Character[]>([]);
   const [showAddForm, setShowAddForm] = useState(false)
   const [showUpdateAvatarForm, setShowUpdateAvatarForm] = useState(false)
-  const [loading, setLoading] = useState<boolean>(true);
   const [editingCharacter, setEditCharacter] = useState<Character|null>();
   // const [error, setError] = useState<string | null>(null);
 
@@ -24,11 +29,8 @@ const ShowCharacters: FC<ShowCharactersProps> = () => {
         setCharacters(result);
       } catch (err) {
         MessageService.error('Failed to fetch characters');
-      } finally {
-        setLoading(false);
       }
     };
-
     getCharacters();
   }, []);
 
@@ -74,8 +76,6 @@ const ShowCharacters: FC<ShowCharactersProps> = () => {
       MessageService.error('Failed to update avatar'+err);
     }
   }
-
-  if (loading) return <p>Loading...</p>;
   // if (error) return <p>{error}</p>;
 
   const openForm = (character?: Character) => {
@@ -112,9 +112,11 @@ const ShowCharacters: FC<ShowCharactersProps> = () => {
         </div>
         <div>
           {characters.map((character) => (
-            <CharacterInformation key={character.id} character={character}
-            onEdit={() => openForm(character)} onDelete={DeleteCharacter} 
-            onUpdateAvatar={()=>OpenFormUpdateAvatar(character)} />
+            <LazyLoad key={character.id} placeholder={<LoadingCharacter />}>
+              <CharacterInformation key={character.id} character={character}
+              onEdit={() => openForm(character)} onDelete={DeleteCharacter} 
+              onUpdateAvatar={()=>OpenFormUpdateAvatar(character)} />
+            </LazyLoad>
           ))}
         </div>
       </div>

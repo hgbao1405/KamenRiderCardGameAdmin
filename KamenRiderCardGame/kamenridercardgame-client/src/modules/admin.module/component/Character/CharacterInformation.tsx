@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { Character } from '../../../../service/character.service';
+import {CharacterProgressBar} from '../../../../components/ui/ui';
 
 const LoadingAvatarCharacter = () => (
-  <div className="Avatar character loading">
-    <div className='height=[48] width=[48] rounded-full mr-3 bg-gray-500'></div>
-  </div>
+  <div className='h-[48] w-[48] rounded-full mr-3 bg-gray-500'></div>
 )
 const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'danger' }> = ({ 
   children, 
@@ -18,13 +17,6 @@ const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { variant
     </button>
   )
 }
-
-const ProgressBar: React.FC<{ value: number }> = ({ value }) => (
-  <div className="bg-gray-200 rounded h-1">
-    <div className="bg-blue-500 h-full rounded" style={{ width: `${value}%` }}></div>
-  </div>
-)
-
 const CharacterInformation: React.FC<{ 
   character: Character;
   onEdit: (character: Character) => void; 
@@ -44,27 +36,40 @@ const CharacterInformation: React.FC<{
         onError={(e) => e.currentTarget.src = '/placeholder.png'} alt={character.name} 
         className="character-image character-image w-12 h-12 rounded-full mr-3" />
         
-        <h2 className="character-name flex items-center mb-3">{character.name}</h2>
+        <h2 className="character-name flex  items-center mb-3">{character.name}</h2>
       </div>
       {isHovered && (
         <>
           <p className="character-description text-gray-500 mb-3 text-sm">{character.description}</p>
           <div className="character-stats mb-3">
-            <div className="stat-item mb-1.5">
-              <span className="stat-label text-xs font-bold">Speed</span>
-              <ProgressBar value={character.speed} />
+            <div className="mb-1.5">
+              <span className="text-xs font-bold">Speed:</span>
+              <span className="text-xs font-bold">{character.speed} m/s</span>
+              <CharacterProgressBar value={character.speed} maxValue={150} />
             </div>
-            <div className="stat-item mb-1.5">
-              <span className="stat-label text-xs font-bold">Attack</span>
-              <ProgressBar value={character.attack} />
+            <div className="mb-1.5">
+              <span className="text-xs font-bold">Attack:</span>
+              <span className="text-xs font-bold">{character.attack} t</span>
+              <CharacterProgressBar value={character.attack} maxValue={100} />
+              {/* <ProgressBar value={character.attack} /> */}
             </div>
-            <div className="stat-item mb-1.5">
-              <span className="stat-label text-xs font-bold">Kick</span>
-              <ProgressBar value={character.kick} />
+            <div className="mb-1.5">
+              <span className="text-xs font-bold">Kick:</span>
+              <span className="text-xs font-bold">{character.kick} t</span>
+              <CharacterProgressBar value={character.kick} maxValue={100} />
+              {/* <ProgressBar value={character.kick} /> */}
             </div>
-            <div className="stat-item mb-1.5">
-              <span className="stat-label text-xs font-bold">Health</span>
-              <ProgressBar value={character.health} />
+            <div className="mb-1.5">
+              <span className="text-xs font-bold">Jump:</span>
+              <span className="text-xs font-bold">{character.jump} m</span>
+              <CharacterProgressBar value={character.jump} maxValue={100} />
+              {/* <ProgressBar value={character.jump} /> */}
+            </div>
+            <div className="mb-1.5">
+                <span className="text-xs font-bold">Health:</span>
+                <span className="text-xs font-bold">{character.health}</span>
+                <CharacterProgressBar value={character.health} maxValue={1000} />
+              {/* <ProgressBar value={character.health} /> */}
             </div>
           </div>
           <div className="flex justify-between">

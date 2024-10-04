@@ -23,12 +23,13 @@ namespace SharedResource.Models
         public string Description { get; set; }
         [AllowNull]
         public string Avatar { get; set; }
-        public int Attack { get; set; }=0;
-        public int Speed { get; set; }=0;
+        public float Attack { get; set; }=0;
+        public float Speed { get; set; }=0;
+        public float Kick { get; set; } = 0;
+        public float Jump { get; set; } = 0;
         public int HPForm { get; set; } = 0;
-        public int Kick { get; set; } = 0;
 
         [ForeignKey("IdTypeForm")]
-        public TypeForm TypeForm { get; set; }
+        public virtual TypeForm? TypeForm { get; set; }
     }
 }

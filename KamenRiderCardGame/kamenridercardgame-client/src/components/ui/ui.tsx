@@ -1,5 +1,14 @@
 import React, { ReactNode } from 'react'
+import {Progress} from 'antd';
+export const CharacterProgressBar: React.FC<{ value: number; maxValue: number; donvi?:string }> = ({ value, maxValue, donvi }) => {
+  const hpPercentage = (value / maxValue) * 100;
 
+  return (
+    <div>
+      <Progress percent={hpPercentage} status="active" format={() => `${value} ${donvi?donvi:""}`} />
+    </div>
+  );
+};  
 const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'danger' }> = ({ 
     children, 
     variant = 'primary', 
@@ -13,19 +22,6 @@ const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { variant
     )
   }
   
-  const ProgressBar: React.FC<{ value: number,max?: number,className?: string; }> 
-  = ({ value, max = 100, className = '' }) => {
-        const percentage = (value / max) * 100;
-        return (
-            <div className={`progress-bar ${className}`}>
-            <div 
-                className="progress-bar-fill" 
-                style={{ width: `${percentage}%` }}
-            ></div>
-            </div>
-        );
-    };
-
   interface CardProps {
     children: ReactNode;
     className?: string;
@@ -66,4 +62,4 @@ const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { variant
       {children}
     </div>
   )
-  export { Button, ProgressBar }
+  export { Button }

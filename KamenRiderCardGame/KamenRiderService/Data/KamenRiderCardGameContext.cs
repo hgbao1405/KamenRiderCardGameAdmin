@@ -26,20 +26,36 @@ namespace KamenRiderCardGame.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Form>().HasData(
+                new Form()
+                {
+                    Id = 1,
+                    IdCharacter = 1,
+                    Name="Tatoba",
+                    IdTypeForm=2,
+                    Avatar = "images/Tatoba.png",
+                    Description= "Tatoba Combo also known as the Multi Combo " +
+                    " is the default combination of OOO accessed using " +
+                    "the Taka, Tora, & Batta Core Medals.",
+                    Attack=30,
+                    Kick=12
+                }
+                );
             builder.Entity<KamenRiderType>().HasData(
                 new KamenRiderType
                 {
                     Id = 1,
-                    Name = "Normal Kamen Rider",
-                    Description = "Normal Kamen Rider is Kamen Rider," +
-                    " who has no or one item to change form.",
+                    Name = "MultiComponent Kamen Rider",
+                    Description = "MultiComponent Kamen Rider is Kamen Rider," +
+                    " who has more than one item to change form.",
                 },
                 new KamenRiderType
                 {
                     Id = 2,
-                    Name = "MultiComponent Kamen Rider",
-                    Description = "MultiComponent Kamen Rider is Kamen Rider," +
-                    " who has more than one item to change form.",
+                    Name = "Normal Kamen Rider",
+                    Description = "Normal Kamen Rider is Kamen Rider," +
+                    " who has no or one item to change form.",
                 }
                 );
             builder.Entity<SharedResource.Models.TypeForm>().HasData(
@@ -113,13 +129,10 @@ namespace KamenRiderCardGame.Data
                 );
             
             builder.Entity<Character>().HasData(
-                new Character { Id = 1,
+                new Character { 
+                    Id = 1,
                     Name = "OOO",
-                    Health = 100, Attack = 10,
                     Avatar = "images/OOO.png",
-                    Kick = 10,
-                    Speed = 10,
-                    Jump=10,
                     Description="OOO",
                     KamenRiderTypeId=1
                 },
@@ -127,27 +140,17 @@ namespace KamenRiderCardGame.Data
                 {
                     Id = 2,
                     Name = "Ex-Aid",
-                    Health = 100,
-                    Attack = 10,
-                    Kick = 10,
-                    Speed = 10,
-                    Jump=10,
                     Avatar = "images/Ex-Aid.png",
                     Description="Ex-Aid",
-                    KamenRiderTypeId=1
+                    KamenRiderTypeId=2
                 },
                 new Character
                 {
                     Id = 3,
                     Name = "Gavv",
-                    Health = 100,
-                    Attack = 10,
-                    Kick = 10,
-                    Speed = 10,
-                    Jump=10,
                     Avatar = "images/Gavv.png",
                     Description="Gavv",
-                    KamenRiderTypeId=1
+                    KamenRiderTypeId=2
                 }
             );
         }

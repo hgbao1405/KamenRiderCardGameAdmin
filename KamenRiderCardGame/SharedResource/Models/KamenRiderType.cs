@@ -17,6 +17,6 @@ namespace SharedResource.Models
         [AllowNull]
         public string Description { get; set; }
 
-        public List<TypeForm> listTypeForms { get; set; }
+        public virtual ICollection<TypeForm>? listTypeForms { get; set; }
     }
 }

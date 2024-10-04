@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import CharacterService, { Character } from "../../../../service/character.service"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../../../components/ui/ui"
-import { Button, ProgressBar } from "../../../../components/ui/ui";
+import { Button, CharacterProgressBar } from "../../../../components/ui/ui";
 import MessageService from "../../../../service/message.service";
 
 export default function CharacterList() {
@@ -39,24 +39,24 @@ export default function CharacterList() {
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span>Speed:</span>
-                    <ProgressBar value={character.speed} className="w-2/3" />
+                    <CharacterProgressBar value={character.speed} maxValue={100} />
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Attack:</span>
-                    <ProgressBar value={character.attack} className="w-2/3" />
+                    <CharacterProgressBar value={character.attack} maxValue={100} />
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Kick:</span>
-                    <ProgressBar value={character.kick} className="w-2/3" />
+                    <CharacterProgressBar value={character.kick} maxValue={100} />
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Health:</span>
-                    <ProgressBar value={character.health} className="w-2/3" />
+                    <CharacterProgressBar value={character.health} maxValue={1000} />
                   </div>
                 </div>
               </CardContent>
               <CardFooter>
-                <Button onClick={() => setSelectedCharacter(character)} className="w-full">
+                <Button onClick={() => setSelectedCharacter(character)} >
                   View Details
                 </Button>
               </CardFooter>
@@ -80,28 +80,28 @@ export default function CharacterList() {
                 <div className="space-y-4">
                   <div>
                     <h3 className="font-semibold mb-2">Speed</h3>
-                    <ProgressBar value={selectedCharacter.speed} className="w-full" />
+                    <CharacterProgressBar value={selectedCharacter.speed} maxValue={100}  />
                     <span className="text-sm text-muted-foreground">{selectedCharacter.speed}%</span>
                   </div>
                   <div>
                     <h3 className="font-semibold mb-2">Attack</h3>
-                    <ProgressBar value={selectedCharacter.attack} className="w-full" />
+                    <CharacterProgressBar value={selectedCharacter.attack} maxValue={100}  />
                     <span className="text-sm text-muted-foreground">{selectedCharacter.attack}%</span>
                   </div>
                   <div>
                     <h3 className="font-semibold mb-2">Kick</h3>
-                    <ProgressBar value={selectedCharacter.kick} className="w-full" />
+                    <CharacterProgressBar value={selectedCharacter.kick} maxValue={100}  />
                     <span className="text-sm text-muted-foreground">{selectedCharacter.kick}%</span>
                   </div>
                   <div>
                     <h3 className="font-semibold mb-2">Health</h3>
-                    <ProgressBar value={selectedCharacter.health} className="w-full" />
+                    <CharacterProgressBar value={selectedCharacter.health} maxValue={1000}  />
                     <span className="text-sm text-muted-foreground">{selectedCharacter.health}%</span>
                   </div>
                 </div>
               </CardContent>
               <CardFooter>
-                <Button onClick={() => setSelectedCharacter(null)} className="w-full">
+                <Button onClick={() => setSelectedCharacter(null)}>
                   Close
                 </Button>
               </CardFooter>

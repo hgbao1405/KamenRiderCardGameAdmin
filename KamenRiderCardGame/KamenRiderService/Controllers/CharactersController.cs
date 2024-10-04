@@ -54,25 +54,54 @@ namespace KamenRiderCardGame.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCharacter(int id, [FromBody] Character character)
         {
-            if (id != character.Id)
-            {
-                _logger.LogWarning("Character with id:{charId} not found", id);
-                return BadRequest();
-            }
-
-            _logger.LogInformation("Update character with id:{charId}", id);
-            character.Update();
-            _context.Entry(character).State = EntityState.Modified;
-
             try
             {
+                Character characterExist=new Character();
+                if (!CharacterExists(id, out characterExist) || character.Id!=id)
+                {
+                    _logger.LogWarning("Character with id:{charId} not found", id);
+                    return NotFound("Character with id:" + id + " not found");
+                }
+
+                var characterType = await _context.KamenRiderTypes.FirstOrDefaultAsync(x => x.Id == character.KamenRiderTypeId);
+                if (characterType == null)
+                {
+                    _logger.LogWarning("Character Type is not found");
+                    return BadRequest("Character Type is not found");
+                }
+
+                if (characterExist.KamenRiderTypeId != character.KamenRiderTypeId)
+                {
+                    var Forms=await _context.Form.Where(x => x.IdCharacter == character.Id && x.Deleted == false)
+                        .ToListAsync();
+
+                    if (Forms.Count > 0)
+                    {
+                        _logger.LogWarning("This character has forms can't change character type");
+                        return BadRequest("This character has forms can't change character type");
+                    }
+                    characterExist.KamenRiderTypeId = character.KamenRiderTypeId;
+                }
+                    
+                characterExist.Description = character.Description;
+                characterExist.Name = character.Name;
+                characterExist.Attack = character.Attack;
+                characterExist.Jump = character.Jump;
+                characterExist.Kick = character.Kick;
+                characterExist.Health = character.Health;
+                characterExist.Speed = character.Speed;
+
+                characterExist.Update();
+
+                _logger.LogInformation("Update character with id:{charId}", id);
+                _context.Entry(characterExist).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 _logger.LogInformation("Update character with id:{charId} success", id);
                 return Ok();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CharacterExists(id))
+                if (!CharacterExists(id, out Character characterExist))
                 {
                     _logger.LogWarning("Character with id:{charId} not found", id);
                     return NotFound();
@@ -93,7 +122,6 @@ namespace KamenRiderCardGame.Controllers
         {
             try
             {
-
                 _logger.LogInformation("Create character with id:{charId}", character.Id);
                 character.Create();
                 _context.Character.Add(character);
@@ -139,9 +167,10 @@ namespace KamenRiderCardGame.Controllers
             }
         }
 
-        private bool CharacterExists(int id)
+        private bool CharacterExists(int id, out Character character)
         {
-            return _context.Character.Any(e => e.Id == id && e.Deleted == false);
+            character = _context.Character.Find(id);
+            return character != null && character.Deleted == false;
         }
 
         [HttpPut("UpdateImage")]

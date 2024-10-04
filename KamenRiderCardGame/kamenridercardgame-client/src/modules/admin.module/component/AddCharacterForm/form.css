@@ -1,0 +1,4 @@
+.select__control--is-focused {
+    border-color: black !important;  
+    box-shadow: 0 0 0 1px black !important; 
+}

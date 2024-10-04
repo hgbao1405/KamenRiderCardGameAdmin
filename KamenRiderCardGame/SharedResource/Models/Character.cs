@@ -9,17 +9,17 @@ namespace SharedResource.Models
     {
         [Key]
         public int Id { get; set; }
-        public int Health { get; set; } = 0;
-        public int Attack { get; set; } = 0;
-        public int Kick { get; set; } = 0;
-        public int Speed { get; set; } = 0;
-        public int Jump { get; set; } = 0;
+        public int Health { get; set; } = 1000;
+        public float Attack { get; set; } = 0;
+        public float Kick { get; set; } =  0;
+        public float Speed { get; set; } = 0;
+        public float Jump { get; set; } = 0;
         [AllowNull]
         public string Description { get; set; }
         [AllowNull]
         public string Avatar { get; set; }
         public int KamenRiderTypeId { get; set; }
         [ForeignKey("KamenRiderTypeId")]
-        public KamenRiderType KamenRiderType { get; set; }
+        public virtual KamenRiderType? KamenRiderType { get; set; }
     }
 }

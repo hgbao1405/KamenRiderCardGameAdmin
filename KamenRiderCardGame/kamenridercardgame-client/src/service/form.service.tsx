@@ -1,6 +1,6 @@
 import MessageService from "./message.service";
 
-  export interface Character {
+  export interface Form {
     id: number;
     name: string;
     description: string;
@@ -8,12 +8,14 @@ import MessageService from "./message.service";
     speed: number;
     attack: number;
     kick: number;
-    health: number;
+    hpForm: number;
     jump: number;
-    kamenRiderTypeId: Number;
+    idTypeForm: number;
+    idCharacter: number;
   }
- class CharacterService{
-    static UpdateAvatar=async(id: number, file: File | null): Promise<Character> => {
+ class FormService{
+    private static Url="https://localhost:7223/api/Forms";
+    static UpdateAvatar=async(id: number, file: File | null): Promise<Form> => {
       try {
         if (file) {
           const request = new FormData();
@@ -30,22 +32,20 @@ import MessageService from "./message.service";
             MessageService.error('Network response was not ok');
             return Promise.reject('Network response was not ok');
           }
-          const data: Character = await response.json();
+          const data: Form = await response.json();
           return data;
         }
       } catch (error) {
-        console.error('Error fetching characters:', error);
-        MessageService.error('Failed to update character:'+error);
+        console.error('Error fetching Forms:', error);
+        MessageService.error('Failed to update Form:'+error);
         return Promise.reject(error);
       }
       throw new Error('Method not implemented.');
     }
 
-    private static Url="https://localhost:7223/api/Characters";
-
-    static GetAllCharacters = async (): Promise<Character[]> => {
+    static GetAllForms = async (): Promise<Form[]> => {
       try {
-        // G i API th m m ng nh n v  tu URL https://localhost:7223/api/Characters
+        // G i API th m m ng nh n v  tu URL https://localhost:7223/api/Forms
         const response = await fetch(this.Url);
 
         // Ki m tra xem c u tr y API c  th nh c ng hay kh ng
@@ -53,48 +53,48 @@ import MessageService from "./message.service";
           MessageService.error('Network response was not ok');
           return Promise.reject('Network response was not ok');
         }
-        const data: Character[] = await response.json(); 
+        const data: Form[] = await response.json(); 
         return data;
       } catch (error) {
-        MessageService.error('Error fetching characters:'+ error);
+        MessageService.error('Error fetching Forms:'+ error);
         throw error;
       }
     };
 
     /**
      * G i API th m m t nh n v o c s d li u
-     * @returns {Promise<Character>} Trả v  nh n v a th m
+     * @returns {Promise<Form>} Trả v  nh n v a th m
      */
-    static AddCharacter = async(character: Character): Promise<Character>=>{
+    static AddForm = async(Form: Form): Promise<Form>=>{
       try {
         const response = await fetch(this.Url, {
           method: 'POST', // Use POST method
           headers: {
             'Content-Type': 'application/json', // Set headers for JSON
           },
-          body: JSON.stringify(character), // Convert character object to JSON
+          body: JSON.stringify(Form), // Convert Form object to JSON
         });
         if (!response.ok) {
           MessageService.error('Network response was not ok');
           return Promise.reject('Network response was not ok');
         }
-        const data: Character = await response.json();
-        MessageService.success('Character added successfully');
+        const data: Form = await response.json();
+        MessageService.success('Form added successfully');
         return data;
       } catch (error) {
-        MessageService.error('Error fetching characters:' + error);
+        MessageService.error('Error fetching Forms:' + error);
         throw error;
       }
     }
 
-    static UpdateCharacter = async(character: Character): Promise<boolean>=>{
+    static UpdateForm = async(Form: Form): Promise<boolean>=>{
       try {
-        const response = await fetch(this.Url+"/"+character.id, {
+        const response = await fetch(this.Url+"/"+Form.id, {
           method: 'PUT', // Use PUT method
           headers: {
             'Content-Type': 'application/json', // Set headers for JSON
           },
-          body: JSON.stringify(character), // Convert character object to JSON
+          body: JSON.stringify(Form), // Convert Form object to JSON
         });
         if (!response.ok) {
           MessageService.error('Network response was not ok');
@@ -102,12 +102,12 @@ import MessageService from "./message.service";
         }
         return true;
       } catch (error) {
-        MessageService.error('Failed to update character:'+error);
+        MessageService.error('Failed to update Form:'+error);
         return false;
       }
     }
 
-    static DeleteCharacter = async(id: number): Promise<boolean>=>{
+    static DeleteForm = async(id: number): Promise<boolean>=>{
       try { 
         const response = await fetch(this.Url+"/"+id, {
           method: 'DELETE', // Use DELETE method
@@ -116,13 +116,13 @@ import MessageService from "./message.service";
           MessageService.error('Network response was not ok');
           return false;
         }
-        MessageService.success('Character deleted successfully');
+        MessageService.success('Form deleted successfully');
         return true;
       } catch (error) {
-        MessageService.error('Failed to delete character:'+error);
+        MessageService.error('Failed to delete Form:'+error);
         throw error;
       }
     }
   }
 
-  export default CharacterService;
+  export default FormService;

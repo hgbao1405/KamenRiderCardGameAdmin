@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { AdminHome, ShowCharacters } from '../modules/admin.module/admin.module';
+import * as admin from '../modules/admin.module/admin.module';
 import React from 'react';
 import LayoutAdmin from '../components/Layout/LayoutAdmin/LayoutAdmin';
 
@@ -7,8 +7,9 @@ const AdminRouter: React.FC = () => {
   return (
       <LayoutAdmin>
         <Routes>
-          <Route path="/" element={<AdminHome />} />
-          <Route path="/characters" element={<ShowCharacters />} />
+          <Route path="/" element={<admin.AdminHome />} />
+          <Route path="/characters" element={<admin.ShowCharacters />} />
+          <Route path="/forms" element={<admin.ShowForm />} />
         </Routes>
       </LayoutAdmin>
   );

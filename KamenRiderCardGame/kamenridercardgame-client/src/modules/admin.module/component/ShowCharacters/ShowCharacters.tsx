@@ -4,18 +4,19 @@ import CharacterService from '../../../../service/character.service'
 import {CharacterInformation,Button} from '../Character/CharacterInformation';
 import AddCharacterForm from '../AddCharacterForm/AddCharacterForm';
 import MessageService from '../../../../service/message.service';
-import UpdateAvatarForm from '../AddCharacterForm/UploadAvatar';
+import UpdateAvatarForm from '../AddCharacterForm/UpdateAvatarCharacter';
 import LazyLoad from 'react-lazyload';
 
 interface ShowCharactersProps {}
 
 const LoadingCharacter = () => (
-  <div className="loading border border-gray-500 rounded-lg p-3 mb-3 transition-all duration-300 ease-in-out overflow-hidden hover:h-auto">
+  <div className="loading border bg-gray-300 border-gray-200 rounded-lg p-3 mb-3 h-[85px] ">
+    
   </div>
 )
 
 const ShowCharacters: FC<ShowCharactersProps> = () => {
-  
+  const [kamenRiderTypes, setKamenRiderTypes] = useState([]);
   const [characters, setCharacters] = useState<Character[]>([]);
   const [showAddForm, setShowAddForm] = useState(false)
   const [showUpdateAvatarForm, setShowUpdateAvatarForm] = useState(false)
@@ -111,13 +112,13 @@ const ShowCharacters: FC<ShowCharactersProps> = () => {
           <Button className='px-4 py-2 bg-blue-500 text-white rounded' onClick={() => openForm()}>Add Character</Button>
         </div>
         <div>
-          {characters.map((character) => (
-            <LazyLoad key={character.id} placeholder={<LoadingCharacter />}>
-              <CharacterInformation key={character.id} character={character}
-              onEdit={() => openForm(character)} onDelete={DeleteCharacter} 
-              onUpdateAvatar={()=>OpenFormUpdateAvatar(character)} />
-            </LazyLoad>
-          ))}
+            {characters.map((character) => (
+              <LazyLoad key={character.id} placeholder={<LoadingCharacter />}>
+                <CharacterInformation key={character.id} character={character}
+                onEdit={() => openForm(character)} onDelete={DeleteCharacter} 
+                onUpdateAvatar={()=>OpenFormUpdateAvatar(character)} />
+              </LazyLoad>
+            ))}
         </div>
       </div>
       {showAddForm && <AddCharacterForm initialData={editingCharacter||null} onSubmit={editingCharacter ? handleEdit : handleAdd} onClose={() => setShowAddForm(false)} />} 

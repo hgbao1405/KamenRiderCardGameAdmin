@@ -20,6 +20,6 @@ namespace SharedResource.Models
         public int IdKamenRiderType { get; set; }
 
         [ForeignKey("IdKamenRiderType")]
-        public KamenRiderType KamenRiderType { get; set; }
+        public virtual KamenRiderType? KamenRiderType { get; set; }
     }
 }

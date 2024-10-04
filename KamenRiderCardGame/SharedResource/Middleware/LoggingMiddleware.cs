@@ -25,6 +25,7 @@ namespace SharedResource.Middleware
             _logger.LogInformation("Request: {Method} {Path}", context.Request.Method, context.Request.Path);
 
             await _next(context);
+
         }
     }
 }

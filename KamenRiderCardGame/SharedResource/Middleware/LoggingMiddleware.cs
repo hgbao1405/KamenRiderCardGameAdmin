@@ -8,15 +8,12 @@ namespace SharedResource.Middleware
     public class LoggingMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IHubContext<LogHub> _hubContext;
         private readonly ILogger<LoggingMiddleware> _logger;
 
         public LoggingMiddleware(RequestDelegate next,
-            IHubContext<LogHub> hubContext,
             ILogger<LoggingMiddleware> logger)
         {
             _next = next;
-            _hubContext = hubContext;
             _logger = logger;
         }
 

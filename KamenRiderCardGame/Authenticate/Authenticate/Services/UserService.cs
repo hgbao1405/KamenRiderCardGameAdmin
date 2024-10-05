@@ -23,5 +23,33 @@ namespace Authenticate.Services
             var roles = _context.UserRoles.Include(x => x.User).Include(x => x.Role).Where(u => u.User.Username == username).ToList();
             return roles.Select(x => x.Role).ToList();
         }
+
+        public bool IsEixst(string username)
+        {
+            return _context.Users.FirstOrDefault(x=>x.Username == username) != null;
+        }
+
+        public string Regrister(string username, string password)
+        {
+            try
+            {
+                _context.Users.Add(new User
+                {
+                    Username = username,
+                    Password = password
+                });
+                _context.SaveChanges(); 
+                _context.UserRoles.Add(new UserRole
+                {
+                    UserId = _context.Users.FirstOrDefault(x => x.Username == username).Id,
+                    RoleId = 2
+                });
+                _context.SaveChanges();
+                return "Success";
+            }
+            catch (Exception ex){
+                return ex.Message;
+            }
+        }
     }
 }

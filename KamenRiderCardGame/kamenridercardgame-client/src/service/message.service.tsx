@@ -28,7 +28,18 @@ export default class MessageService {
       },
     });
   };
-
+  static errorhtml = (message: any) => {
+    toast.error(message, {
+      style: {
+        background: '#EF4444',
+        color: '#fff',
+      },
+      iconTheme: {
+        primary: '#fff',
+        secondary: '#EF4444',
+      },
+    });
+  };
   static warning = (message: string) => {
     console.log('Triggering warning toast:', message);
     toast(message, {

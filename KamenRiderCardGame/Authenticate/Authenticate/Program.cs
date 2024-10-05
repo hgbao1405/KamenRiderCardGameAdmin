@@ -13,6 +13,7 @@ namespace Authenticate
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
             var secretKey = "thisIsAnotherLongerSecretKeyThatIsMoreSecureAndHas64Characters!";
 
             builder.Services.AddAuthentication(options =>
@@ -45,8 +46,21 @@ namespace Authenticate
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IUserService,UserService>();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("http://localhost:3000")
+                                            .AllowAnyHeader() // Hoặc cụ thể .WithHeaders("Content-Type")
+                                            .AllowAnyMethod(); // Cho phép mọi phương thức như GET, POST, PUT, DELETE
+                                  });
+            });
             var app = builder.Build();
 
+            app.UseMiddleware<SharedResource.Middleware.LoggingMiddleware>();
+
+            app.UseCors(MyAllowSpecificOrigins);
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

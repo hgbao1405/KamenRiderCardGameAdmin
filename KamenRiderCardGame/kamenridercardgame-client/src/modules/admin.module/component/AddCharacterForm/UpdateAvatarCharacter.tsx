@@ -9,7 +9,7 @@ interface UpdateAvatarFormProps {
   onSubmit: (id: number, avatarFile: File | null) => void;
 }
 
-const UpdateAvatarForm: React.FC<UpdateAvatarFormProps> = ({ character, onClose, onSubmit }) => {
+const UpdateAvatarCharacter: React.FC<UpdateAvatarFormProps> = ({ character, onClose, onSubmit }) => {
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>("https://localhost:7223/"+character?.avatar ?? null);
 
@@ -71,4 +71,4 @@ const UpdateAvatarForm: React.FC<UpdateAvatarFormProps> = ({ character, onClose,
   );
 };
 
-export default UpdateAvatarForm;
+export default UpdateAvatarCharacter;

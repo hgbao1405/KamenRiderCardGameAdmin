@@ -38,7 +38,6 @@ const LayoutAdmin: FC<{children: React.ReactNode}> = ({children}) =>
                 </header>
                 <main className='mt-[70px]'>{children}</main>
             </div>
-            <Toaster />
         </div>
   );
 }

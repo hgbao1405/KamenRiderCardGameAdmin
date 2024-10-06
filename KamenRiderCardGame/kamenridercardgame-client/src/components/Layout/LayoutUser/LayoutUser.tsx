@@ -1,25 +1,30 @@
 import React, { FC, useState } from 'react';
 import './LayoutUser.css';
+import { useAuth } from '../../../modules/user.module/component/Auth/AuthContext';
+import { Link } from 'react-router-dom';
 
 const LayoutUser: FC<{children: React.ReactNode}> = ({children}) => {
   const [showMenu, setShowMenu] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
   
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+
   return (
   <div className="LayoutUser">
   <header className="header">
       <h1>My App Header</h1>
       {
-        localStorage.getItem('token') ? (
+        isAuthenticated ? (
           <div className="login-menu">
             <button className="login-menu-button" onClick={toggleMenu}>
-              Hello,{localStorage.getItem('username')}! ▼
+              Hello,{user?.username}! ▼
             </button>
             {showMenu && (
               <div className="login-dropdown">
-                <a href="/logout" className="login-option">Logout</a>
+                <a onClick={logout} className="login-option">Logout</a>
+                {user?.roles?.find((role) => role.toLowerCase() === 'admin') && <Link to="/admin" className="login-option">Manager</Link>}
               </div>
             )}
           </div>

@@ -6,9 +6,11 @@ import UserRouter from './Routers/user.router';
 import { AdminLogin } from './modules/admin.module/admin.module';
 import { Register, UserLogin } from './modules/user.module/user.module';
 import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from './modules/user.module/component/Auth/AuthContext';
 
 function App() {
   return (
+    <AuthProvider>
       <Router>
         <Routes>
           <Route path="*" element={<UserRouter />} />
@@ -17,9 +19,9 @@ function App() {
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/*" element={<AdminRouter />} />
         </Routes>
-        
         <Toaster />
       </Router>
+    </AuthProvider>
   );
 }
 

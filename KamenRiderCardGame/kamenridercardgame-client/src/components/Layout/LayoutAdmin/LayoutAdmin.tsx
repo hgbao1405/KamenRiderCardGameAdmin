@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import './LayoutAdmin.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { useAuth } from '../../../modules/user.module/component/Auth/AuthContext';
 
 const routeNames:{ [key: string]: string } = {
   '/admin': 'Admin Home',
@@ -10,22 +11,24 @@ const routeNames:{ [key: string]: string } = {
 
 const LayoutAdmin: FC<{children: React.ReactNode}> = ({children}) =>
 {
+  const { user, logout } = useAuth();
   const location = useLocation();
   const routeName = routeNames[location.pathname.toLowerCase()];
   const navigate = useNavigate();
   const handleLogout = () => {
-    // Clear any authentication data here (localStorage, session, etc.)
-    navigate('/'); // Adjust the path as needed
+    navigate('/');
+    logout();
   };
   return  (
     <div className="admin-layout">
             <aside className="sidebar">
-                <h2>Admin Panel</h2>
+                <h2>Hello {user?.username}!</h2>
                 <nav>
                     <ul>
                         <li><Link to="/admin">Dashboard</Link></li>
                         <li><Link to="characters">Characters</Link></li>
                         <li><Link to="forms">forms</Link></li>
+                        <li><a onClick={handleLogout}>Logout</a></li>
                     </ul>
                 </nav>
             </aside>

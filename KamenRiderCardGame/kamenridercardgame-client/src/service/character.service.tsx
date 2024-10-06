@@ -1,3 +1,5 @@
+import { useAuth } from "../modules/user.module/component/Auth/AuthContext";
+import AuthToken from "./authToken.service";
 import MessageService from "./message.service";
 
   export interface Character {
@@ -13,6 +15,9 @@ import MessageService from "./message.service";
     kamenRiderTypeId: Number;
   }
  class CharacterService{
+    
+    private static Url="https://localhost:7223/api/Characters";
+
     static UpdateAvatar=async(id: number, file: File | null): Promise<Character> => {
       try {
         if (file) {
@@ -23,6 +28,7 @@ import MessageService from "./message.service";
           const response = await fetch(this.Url+"/UpdateImage", {
             method: 'PUT', // Use PUT method
             body: request,
+            headers: AuthToken.headerAuth(),
           });
           
           console.log(response);
@@ -40,8 +46,6 @@ import MessageService from "./message.service";
       }
       throw new Error('Method not implemented.');
     }
-
-    private static Url="https://localhost:7223/api/Characters";
 
     static GetAllCharacters = async (): Promise<Character[]> => {
       try {
@@ -69,9 +73,7 @@ import MessageService from "./message.service";
       try {
         const response = await fetch(this.Url, {
           method: 'POST', // Use POST method
-          headers: {
-            'Content-Type': 'application/json', // Set headers for JSON
-          },
+          headers: AuthToken.headerJsonAuth(),
           body: JSON.stringify(character), // Convert character object to JSON
         });
         if (!response.ok) {
@@ -91,9 +93,7 @@ import MessageService from "./message.service";
       try {
         const response = await fetch(this.Url+"/"+character.id, {
           method: 'PUT', // Use PUT method
-          headers: {
-            'Content-Type': 'application/json', // Set headers for JSON
-          },
+          headers: AuthToken.headerJsonAuth(),
           body: JSON.stringify(character), // Convert character object to JSON
         });
         if (!response.ok) {
@@ -111,6 +111,7 @@ import MessageService from "./message.service";
       try { 
         const response = await fetch(this.Url+"/"+id, {
           method: 'DELETE', // Use DELETE method
+          headers: AuthToken.headerAuth()
         });
         if (!response.ok) {
           MessageService.error('Network response was not ok');

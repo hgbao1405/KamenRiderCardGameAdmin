@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import '../../../admin.module/component/Auth/Auth.component.css';
 import AuthService from '../../../../service/auth.service';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 const UserLogin: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const { login } = useAuth();
+
   var navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Xử lý đăng nhập user ở đây
     try {
-      var rs = AuthService.Login({ username: username, password: password });
+      login(username, password);
       navigate('/');
     }catch (error) {
       console.log(error);

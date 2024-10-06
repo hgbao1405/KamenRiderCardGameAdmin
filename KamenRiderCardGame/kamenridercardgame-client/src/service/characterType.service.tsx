@@ -1,3 +1,4 @@
+import AuthToken from "./authToken.service";
 import MessageService from "./message.service";
 
   export interface CharacterType {
@@ -6,6 +7,8 @@ import MessageService from "./message.service";
     description: string;
   }
  class CharacterTypeService{
+    
+
     private static Url="https://localhost:7223/api/KamenRiderTypes";
 
     static GetAllCharacterTypes = async (): Promise<CharacterType[]> => {

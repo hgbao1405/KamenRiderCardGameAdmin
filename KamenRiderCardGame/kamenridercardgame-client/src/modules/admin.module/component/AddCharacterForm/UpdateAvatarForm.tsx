@@ -11,7 +11,7 @@ interface UpdateAvatarFormProps {
 
 const UpdateAvatarForm: React.FC<UpdateAvatarFormProps> = ({ character, onClose, onSubmit }) => {
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>("https://localhost:7223/"+character?.avatar ?? null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(character?"https://localhost:7223/"+ character.avatar : null);
 
   useEffect(() => {
     if (!character) {

@@ -23,7 +23,7 @@ const AddCharacterForm: React.FC<CharacterFormProps> = ({ onSubmit, onClose,init
     kick: 50, 
     jump: 50,
     health: 100,
-    kamenRiderTypeId: 1
+    kamenRiderTypeId: 0
   }); 
 
   const [kamenRiderTypes, setKamenRiderTypes] = useState<any[]>([]);
@@ -34,6 +34,7 @@ const AddCharacterForm: React.FC<CharacterFormProps> = ({ onSubmit, onClose,init
       try {
         const result = await CharacterTypeService.GetAllCharacterTypes();
         const options = result.map(type => ({ value: type.id, label: type.name }));
+        options.push({ value: 0, label: 'Select Character Type' });
         setKamenRiderTypes(options);
         if(kamenRiderTypes.length>0 && initialData) {
           handleSelectChange(initialData.kamenRiderTypeId)

@@ -103,10 +103,10 @@ namespace Authenticate.Controllers
         [HttpGet]
         [Authorize]
         public IActionResult GetInfo()
-        {
+            {
             var claims = User.Claims;
 
-            var usernameClaim = claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
+            var usernameClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             var roles = claims
                 .Where(c => c.Type == ClaimTypes.Role) 

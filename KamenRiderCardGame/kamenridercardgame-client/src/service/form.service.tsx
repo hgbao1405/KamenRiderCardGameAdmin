@@ -1,3 +1,4 @@
+import AuthToken from "./authToken.service";
 import MessageService from "./message.service";
 
   export interface Form {
@@ -24,6 +25,7 @@ import MessageService from "./message.service";
 
           const response = await fetch(this.Url+"/UpdateImage", {
             method: 'PUT', // Use PUT method
+            headers: AuthToken.headerAuth(),
             body: request,
           });
           
@@ -69,9 +71,7 @@ import MessageService from "./message.service";
       try {
         const response = await fetch(this.Url, {
           method: 'POST', // Use POST method
-          headers: {
-            'Content-Type': 'application/json', // Set headers for JSON
-          },
+          headers: AuthToken.headerJsonAuth(),
           body: JSON.stringify(Form), // Convert Form object to JSON
         });
         if (!response.ok) {
@@ -91,9 +91,7 @@ import MessageService from "./message.service";
       try {
         const response = await fetch(this.Url+"/"+Form.id, {
           method: 'PUT', // Use PUT method
-          headers: {
-            'Content-Type': 'application/json', // Set headers for JSON
-          },
+          headers: AuthToken.headerJsonAuth(),
           body: JSON.stringify(Form), // Convert Form object to JSON
         });
         if (!response.ok) {
@@ -110,6 +108,7 @@ import MessageService from "./message.service";
     static DeleteForm = async(id: number): Promise<boolean>=>{
       try { 
         const response = await fetch(this.Url+"/"+id, {
+          headers: AuthToken.headerAuth(),
           method: 'DELETE', // Use DELETE method
         });
         if (!response.ok) {

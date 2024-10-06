@@ -1,27 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Auth.component.css';
+import { useAuth } from '../../../user.module/component/Auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const AdminLogin: React.FC = () => {
-  const [email, setEmail] = useState('');
+  const [username, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { isAuthenticated,login } = useAuth();
+
+  const navigator = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Xử lý đăng nhập admin ở đây
-    console.log('Admin login:', { email, password });
+    login(username, password);
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigator('/admin');
+    }
+  }, [isAuthenticated]);
 
   return (
     <div className="auth-container">
       <form className="auth-form" onSubmit={handleSubmit}>
         <h2 className="auth-title">Admin Login</h2>
         <div className="form-group">
-          <label htmlFor="email" className="form-label">Email</label>
+          <label htmlFor="username" className="form-label">Email</label>
           <input
-            type="email"
-            id="email"
+            type="text"
+            id="username"
             className="form-input"
-            value={email}
+            value={username}
             onChange={(e) => setEmail(e.target.value)}
             required
           />

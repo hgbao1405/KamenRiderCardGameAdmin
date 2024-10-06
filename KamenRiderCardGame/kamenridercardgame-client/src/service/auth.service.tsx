@@ -11,7 +11,7 @@ import MessageService from "./message.service";
   }
   export interface User {
     username: string;
-    role: string[];
+    roles: string[];
   }
  class AuthService{
     private static Url="https://localhost:7081/api/Account";
@@ -45,7 +45,7 @@ import MessageService from "./message.service";
       }     
     }
 
-    static Login = async (data: Login): Promise<void> => {
+    static Login = async (data: Login): Promise<string> => {
       try {
         const response = await fetch(this.Url + "/Login", {
           method: "POST",
@@ -65,9 +65,8 @@ import MessageService from "./message.service";
         const jwtToken = result.token; // Hoặc response.access_token tùy vào cấu trúc trả về
         
         // Lưu token vào localStorage
-        localStorage.setItem("token", jwtToken);
-        localStorage.setItem("username", data.username);
         MessageService.success("Login successful");
+        return jwtToken;
         
       } catch (error) {
         MessageService.error("Failed to login: " + error);
@@ -75,23 +74,26 @@ import MessageService from "./message.service";
       }
     }
     
-    static GetInfor(): Promise<User> {
-      return fetch(this.Url + "/GetInfor", {
+    static GetInfor(token: string): Promise<User|null> {
+      const headers = {
+        "Authorization": "Bearer " + token,
+      };
+      
+      console.log("Request Headers:", headers); // Log headers to console
+    
+      return fetch(this.Url + "/GetInfo", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("token"),
-        },
+        headers: headers,
       })
         .then((response) => {
           if (!response.ok) {
-            MessageService.error("Network response was not ok");
-            return Promise.reject("Network response was not ok");
+            MessageService.error("Get Infor error: Network response was not ok");
+            console.log(response.headers); // Log response headers to console
+            return null;
           }
           return response.json();
         });
     }
 
   }
-
   export default AuthService;

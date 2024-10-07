@@ -127,14 +127,15 @@ namespace KamenRiderCardGame.Data
                     " and add damage attack",
                 }
                 );
-            
+            CardAttrHtml cardAttrHtml = new CardAttrHtml();
             builder.Entity<Character>().HasData(
                 new Character { 
                     Id = 1,
                     Name = "OOO",
                     Avatar = "images/OOO.png",
                     Description="OOO",
-                    KamenRiderTypeId=1
+                    KamenRiderTypeId=1,
+                    CardAttrBasic = cardAttrHtml.BasicAttr()
                 },
                 new Character
                 {
@@ -142,7 +143,8 @@ namespace KamenRiderCardGame.Data
                     Name = "Ex-Aid",
                     Avatar = "images/Ex-Aid.png",
                     Description="Ex-Aid",
-                    KamenRiderTypeId=2
+                    KamenRiderTypeId= 2,
+                    CardAttrBasic = cardAttrHtml.BasicAttr()
                 },
                 new Character
                 {
@@ -150,7 +152,8 @@ namespace KamenRiderCardGame.Data
                     Name = "Gavv",
                     Avatar = "images/Gavv.png",
                     Description="Gavv",
-                    KamenRiderTypeId=2
+                    KamenRiderTypeId=2,
+                    CardAttrBasic = cardAttrHtml.BasicAttr()
                 }
             );
         }

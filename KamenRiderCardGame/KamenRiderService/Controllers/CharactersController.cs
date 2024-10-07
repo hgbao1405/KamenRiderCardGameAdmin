@@ -91,6 +91,11 @@ namespace KamenRiderCardGame.Controllers
                 characterExist.Health = character.Health;
                 characterExist.Speed = character.Speed;
 
+                if (character.CardAttrBasic != null)
+                {
+                    characterExist.CardAttrBasic = character.CardAttrBasic;
+                }
+
                 characterExist.Update();
 
                 _logger.LogInformation("Update character with id:{charId}", id);

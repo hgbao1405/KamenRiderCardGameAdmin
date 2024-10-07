@@ -28,6 +28,7 @@ const LayoutAdmin: FC<{children: React.ReactNode}> = ({children}) =>
                         <li><Link to="/admin">Dashboard</Link></li>
                         <li><Link to="characters">Characters</Link></li>
                         <li><Link to="forms">forms</Link></li>
+                        <li><Link to="card-creator">Card Creator</Link></li>
                         <li><a onClick={handleLogout}>Logout</a></li>
                     </ul>
                 </nav>

@@ -1,5 +1,5 @@
-﻿using Authenticate.Models;
-using Authenticate.Services;
+﻿using Authenticate.Interfaces;
+using Authenticate.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -112,11 +112,20 @@ namespace Authenticate.Controllers
                 .Where(c => c.Type == ClaimTypes.Role) 
                 .Select(c => c.Value) 
                 .ToList();
+            var expClaim = User.FindFirst("exp")?.Value;
+            long expUnixTime;
+            DateTime? expirationTime = null;
+
+            if (long.TryParse(expClaim, out expUnixTime))
+            {
+                expirationTime = DateTimeOffset.FromUnixTimeSeconds(expUnixTime).UtcDateTime;
+            }
 
             var userInfo = new
             {
                 Username = usernameClaim,
-                Roles = roles
+                Roles = roles,
+                ExpirationTime = expirationTime
             };
 
             return Ok(userInfo);

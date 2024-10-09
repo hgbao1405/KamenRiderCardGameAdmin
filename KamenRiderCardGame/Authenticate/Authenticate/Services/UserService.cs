@@ -1,4 +1,5 @@
 ﻿using Authenticate.Data;
+using Authenticate.Interfaces;
 using Authenticate.Models;
 using Microsoft.EntityFrameworkCore;
 

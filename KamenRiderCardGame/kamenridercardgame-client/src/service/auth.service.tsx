@@ -12,6 +12,7 @@ import MessageService from "./message.service";
   export interface User {
     username: string;
     roles: string[];
+    expirationTime: Date;
   }
  class AuthService{
     private static Url="https://localhost:7081/api/Account";

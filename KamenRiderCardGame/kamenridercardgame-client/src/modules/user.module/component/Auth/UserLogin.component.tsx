@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../../admin.module/component/Auth/Auth.component.css';
 import AuthService from '../../../../service/auth.service';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ const UserLogin: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
 
   var navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent) => {
@@ -16,11 +16,16 @@ const UserLogin: React.FC = () => {
     // Xử lý đăng nhập user ở đây
     try {
       login(username, password);
-      navigate('/');
     }catch (error) {
       console.log(error);
     }
   };
+  
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated]);
 
   return (
     <div className="auth-container">

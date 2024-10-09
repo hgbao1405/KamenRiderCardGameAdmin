@@ -1,6 +1,6 @@
 import { useState } from "react";
 import UploadWidget from "./UploadWidget.component";
-import Card from "../Card/Card.component";
+import DraggableFlippableCard from "../Card/DraggableFlippableCard.component";
 import { Cloudinary } from '@cloudinary/url-gen';
 
 const CardCreator: React.FC = () => {
@@ -10,7 +10,6 @@ const CardCreator: React.FC = () => {
     const [frontImage, setFrontImage] = useState<string | null>(null);
     const [backImage, setBackImage] = useState<string | null>(null);
     const [avatar, setAvatar] = useState<string | null>(null);
-    const cardStats = { Power: 90, Speed: 75, Intelligence: 85 }; // Các chỉ số mẫu
 
     return (
         <div className="flex justify-between">
@@ -29,9 +28,13 @@ const CardCreator: React.FC = () => {
             </div>
             <div>
                 <h2>Sample Image from Cloudinary:</h2>
-                <Card frontImage={frontImage?frontImage:cld.image('cld-sample-5').toURL()} 
-                backImage={backImage?backImage:cld.image('cld-sample-4').toURL()} 
-                avatar={avatar?avatar:cld.image('cld-sample-5').toURL()} stats={cardStats} />
+                <DraggableFlippableCard
+                    frontImage={frontImage?frontImage:cld.image('cld-sample-5').toURL()} 
+                    backImage={backImage?backImage:cld.image('cld-sample-4').toURL()}
+                    name="John Doe"
+                    avatar={avatar?avatar:cld.image('cld-sample-5').toURL()}
+                    description="This is a description of John Doe. You can drag and reposition this text."
+                />
             </div>
         </div>
     );

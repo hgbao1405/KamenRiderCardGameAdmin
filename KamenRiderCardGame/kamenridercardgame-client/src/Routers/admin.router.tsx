@@ -8,11 +8,11 @@ const AdminRouter: React.FC = () => {
   return (
       <LayoutAdmin>
         <Routes>
-          <Route path="/card-creator" element={<admin.CardCreator />} />
           <Route element={<PrivateRoute isAdmin={true} allowedRoles={['admin']} />}>
             <Route path="/" element={<admin.AdminHome />} />
             <Route path="/characters" element={<admin.ShowCharacters />} />
             <Route path="/forms" element={<admin.ShowForm />} />
+            <Route path="/card-creator" element={<admin.CardCreator />} />
           </Route>
         </Routes>
       </LayoutAdmin>

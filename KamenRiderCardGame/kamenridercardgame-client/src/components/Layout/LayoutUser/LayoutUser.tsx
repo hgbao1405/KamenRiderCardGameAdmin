@@ -22,7 +22,7 @@ const LayoutUser: FC<{children: React.ReactNode}> = ({children}) => {
               Hello,{user?.username}! ▼
             </button>
             {showMenu && (
-              <div className="login-dropdown">
+              <div className="login-dropdown w-full">
                 <a onClick={logout} className="login-option">Logout</a>
                 {user?.roles?.find((role) => role.toLowerCase() === 'admin') && <Link to="/admin" className="login-option">Manager</Link>}
               </div>

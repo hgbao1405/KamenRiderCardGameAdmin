@@ -5,6 +5,7 @@ using Authenticate.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Authenticate.Interfaces;
 
 namespace Authenticate
 {

@@ -34,7 +34,7 @@ const FormInformation: React.FC<{
       <div className="Form-header flex items-center mb-3">
         <img src={'https://localhost:7223/'+Form.avatar + `?height=48&width=48`} 
         onError={(e) => e.currentTarget.src = '/placeholder.png'} alt={Form.name} 
-        className="Form-image Form-image w-12 h-12 rounded-full mr-3" />
+        className="Form-image Form-image h-12 mr-3" />
         
         <h2 className="Form-name flex  items-center mb-3">{Form.name}</h2>
       </div>

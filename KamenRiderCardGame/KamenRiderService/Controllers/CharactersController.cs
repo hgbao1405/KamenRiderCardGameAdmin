@@ -129,6 +129,9 @@ namespace KamenRiderCardGame.Controllers
             {
                 _logger.LogInformation("Create character with id:{charId}", character.Id);
                 character.Create();
+                var CardAttrBasic=new CardAttrHtml();
+                _logger.LogInformation("Create card Layout for character with id:{charId}", character.Id);
+                character.CardAttrBasic=CardAttrBasic.BasicAttr();
                 _context.Character.Add(character);
                 await _context.SaveChangesAsync();
 

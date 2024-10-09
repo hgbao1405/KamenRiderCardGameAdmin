@@ -1,6 +1,6 @@
 ﻿using Authenticate.Models;
 
-namespace Authenticate.Services
+namespace Authenticate.Interfaces
 {
     public interface IUserService
     {

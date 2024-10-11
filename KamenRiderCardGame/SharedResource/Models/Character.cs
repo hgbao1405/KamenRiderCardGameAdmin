@@ -39,23 +39,23 @@ namespace SharedResource.Models
 
     public class CardAttrHtml
     {
-        public HtmlStye? Name { get; set; }
-        public HtmlStye? Avatar { get; set; }
-        public HtmlStye? Description { get; set; }
+        public ICollection<HtmlStye> attrs { get; set; }
 
         public CardAttrHtml() { }
         
         public CardAttrHtml BasicAttr()
         {
-            HtmlStye htmlStye = new HtmlStye();
+            List<HtmlStye> htmlStye = new List<HtmlStye>();
+
+            HtmlStye AttrHtml = new HtmlStye();
 
             CardAttrHtml cardAttrHtml = new CardAttrHtml();
 
-            cardAttrHtml.Name = htmlStye.basicName();
+            htmlStye.Add(AttrHtml.basicName());
+            htmlStye.Add(AttrHtml.basicAvatar());
+            htmlStye.Add(AttrHtml.basicDescription());
 
-            cardAttrHtml.Avatar = htmlStye.basicAvatar();
-
-            cardAttrHtml.Description = htmlStye.basicDescription();
+            cardAttrHtml.attrs = htmlStye;
 
             return cardAttrHtml;
         }
@@ -64,52 +64,54 @@ namespace SharedResource.Models
 
     public class HtmlStye
     {
+        public Attr attr { get; set; }
         public bool? isCenter { get; set; }
         public int? top { get; set; }
         public int? left { get; set; }
-        public int? right { get; set; }
-        public int? bottom { get; set; }
-        public int? topPercent { get; set; }
-        public int? leftPercent { get; set; }
-        public int? rightPercent { get; set; }
-        public int? bottomPercent { get; set; }
         public int? width { get; set; }
         public int? height { get; set; }
         public int? widthPercent { get; set; }
         public int? heightPercent { get; set; }
         public string? color { get; set; }
         public string? fontSize { get; set; }
-        public string? padding { get; set; }
-        public string? margin { get; set; }
-
 
         public HtmlStye basicName()
         {
             HtmlStye h=new HtmlStye();
-            h.color = "black";
+            h.attr = new Attr() { Type = "text", Value = "Name" };
+            h.color = "#ffffff";
             h.fontSize = "20px";
             h.widthPercent = 100;
             h.top = 10;
             h.left = 10;
             h.isCenter = true;
-            return this;
+            return h;
         }
         public HtmlStye basicAvatar()
         {
             HtmlStye h = new HtmlStye();
+            h.attr = new Attr() { Type = "image", Value = "https://res.cloudinary.com/dqnqa1sjb/image/upload/cld-sample-3?_a=DATAg1AAZAA0" };
             h.width=180;
             h.height=180;
             h.top = 40;
             h.isCenter = true;
-            return this;
+            return h;
         }
         public HtmlStye basicDescription()
         {
             HtmlStye h = new HtmlStye();
+            h.attr = new Attr() { Type = "text", Value = "Description" };
+            h.color = "#ffffff";
             h.widthPercent = 100;
-            h.heightPercent = 100;
-            h.bottom = 20;
-            return this;
+            h.height = 100;
+            h.top = 250;
+            return h;
         }
+    }
+
+    public class Attr
+    {
+        public string? Type { get; set; }
+        public string? Value { get; set; }
     }
 }

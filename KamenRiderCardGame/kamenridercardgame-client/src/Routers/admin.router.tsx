@@ -12,8 +12,9 @@ const AdminRouter: React.FC = () => {
             <Route path="/" element={<admin.AdminHome />} />
             <Route path="/characters" element={<admin.ShowCharacters />} />
             <Route path="/forms" element={<admin.ShowForm />} />
-            <Route path="/card-creator" element={<admin.CardCreator />} />
           </Route>
+          
+          <Route path="/card-creator" element={<admin.CardCreator />} />
         </Routes>
       </LayoutAdmin>
   );

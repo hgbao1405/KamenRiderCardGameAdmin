@@ -39,13 +39,20 @@ const ShowForm: FC<ShowFormsProps> = () => {
   const handleAdd: (newForm: Form) => Promise<boolean> = async (newForm: Form) => {
     console.log('Add Form');
     try {
-      const addedForm = await FormService.AddForm(newForm);
-      setForms([...Forms, addedForm]);  // Update Form list
-      return true;
+      const addedForm = await FormService.AddForm(newForm).catch((err) => {
+        console.log(err);
+        return null;
+      });
+
+      if (addedForm) {
+        setForms([...Forms, addedForm]);  // Update Form list
+        return true;
+      }
     } catch (err) {
       MessageService.error('Failed to add Form');
-      return false;
     }
+    
+    return false;
   };
   const handleEdit: (updatedForm: Form) => Promise<boolean> = async (updatedForm: Form) => {
     try {

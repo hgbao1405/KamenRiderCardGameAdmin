@@ -94,15 +94,17 @@ namespace KamenRiderCardGame.Controllers
         {
             _logger.LogInformation("Create form with name:{charName}", form.Name);
 
-            var (character, formExist) = await _checkExistServcie.GetCharacterAndFormAsync(form.IdCharacter, form.Name);
+            var characterTask=_checkExistServcie.CheckExistCharacterAsync(form.IdCharacter);
+            var formExistTask = _checkExistServcie.CheckExistFormAsync(form.IdCharacter,form.Name);
+            await Task.WhenAll(characterTask, formExistTask);
 
             // Kiểm tra nếu một trong hai task trả về null
-            if (character == null)
+            if (characterTask == null)
             {
-                throw new Exception("Character not found");
+                return NotFound("Character with id " + form.IdCharacter + " not found");
             }
 
-            if (formExist != null)
+            if (formExistTask != null)
             {
                 return BadRequest("Form with this name " + form.Name + " is already exists");
             }

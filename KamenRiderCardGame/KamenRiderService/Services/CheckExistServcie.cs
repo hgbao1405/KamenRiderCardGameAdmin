@@ -16,27 +16,19 @@ namespace KamenRiderCardGame.Services
             _options = options;
         }
 
-        public async Task<(Character character, Form formExist)> GetCharacterAndFormAsync(int characterId, string formName)
+        public async Task<Character> CheckExistCharacterAsync(int characterId)
         {
-            var characterTask = Task.Run(() =>
+            using (var context = new KamenRiderCardGameContext(_options))
             {
-                using (var context = new KamenRiderCardGameContext(_options))
-                {
-                    return context.Character.FirstOrDefaultAsync(x => x.Id == characterId && x.Deleted == false).Result;
-                }
-            });
-
-            var formExistTask = Task.Run(() =>
+                return await context.Character.FirstOrDefaultAsync(x => x.Id == characterId && x.Deleted == false);
+            }
+        }
+        public async Task<Form> CheckExistFormAsync(int characterId, string formName)
+        {
+            using (var context = new KamenRiderCardGameContext(_options))
             {
-                using (var context = new KamenRiderCardGameContext(_options))
-                {
-                    return context.Form.FirstOrDefaultAsync(x => x.IdCharacter == characterId && x.Name == formName).Result;
-                }
-            });
-
-            await Task.WhenAll(characterTask, formExistTask);
-
-            return (await characterTask, await formExistTask);
+                return await context.Form.FirstOrDefaultAsync(x => x.IdCharacter == characterId && x.Name == formName);
+            }
         }
     }
 }

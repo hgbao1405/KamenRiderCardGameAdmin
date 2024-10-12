@@ -31,8 +31,9 @@ import MessageService from "./message.service";
           
           console.log(response);
           if (!response.ok) {
-            MessageService.error('Network response was not ok');
-            return Promise.reject('Network response was not ok');
+            const errorResponse:string = await response.text();
+            MessageService.error("Failed to update Avatar Form: " + errorResponse);
+            return Promise.reject(errorResponse);
           }
           const data: Form = await response.json();
           return data;
@@ -75,8 +76,9 @@ import MessageService from "./message.service";
           body: JSON.stringify(Form), // Convert Form object to JSON
         });
         if (!response.ok) {
-          MessageService.error('Network response was not ok');
-          return Promise.reject('Network response was not ok');
+          const errorResponse:string = await response.text();
+          MessageService.error("Failed to add Form: " + errorResponse);
+          return Promise.reject(errorResponse);
         }
         const data: Form = await response.json();
         MessageService.success('Form added successfully');
@@ -95,12 +97,13 @@ import MessageService from "./message.service";
           body: JSON.stringify(Form), // Convert Form object to JSON
         });
         if (!response.ok) {
-          MessageService.error('Network response was not ok');
-          return false;
+          const errorResponse:string = await response.text();
+          MessageService.error("Failed to update Form: " + errorResponse);
+          return Promise.reject(errorResponse);
         }
         return true;
       } catch (error) {
-        MessageService.error('Failed to update Form:'+error);
+        MessageService.error('Error to update Form:'+error);
         return false;
       }
     }
@@ -112,8 +115,9 @@ import MessageService from "./message.service";
           method: 'DELETE', // Use DELETE method
         });
         if (!response.ok) {
-          MessageService.error('Network response was not ok');
-          return false;
+          const errorResponse:string = await response.text();
+          MessageService.error("Failed to delete Form: " + errorResponse);
+          return Promise.reject(errorResponse);
         }
         MessageService.success('Form deleted successfully');
         return true;

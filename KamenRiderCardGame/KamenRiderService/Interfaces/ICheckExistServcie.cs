@@ -4,6 +4,7 @@ namespace KamenRiderCardGame.Interfaces
 {
     public interface ICheckExistServcie
     {
-        Task<(Character character, Form formExist)> GetCharacterAndFormAsync(int characterId, string formName);
+        Task<Character> CheckExistCharacterAsync(int characterId);
+        Task<Form> CheckExistFormAsync(int characterId, string formName);
     }
 }

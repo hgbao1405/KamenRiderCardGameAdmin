@@ -10,7 +10,7 @@ import FormTypeService from "../../../../service/formtype.service";
 import e from "express";
 
 interface FormProps {
-  onSubmit: (form: Form) => void;
+  onSubmit: (form: Form) => Promise<boolean>;
   onClose: () => void;
   initialData: Form|null;
 }
@@ -112,8 +112,11 @@ useEffect(() => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(formData);
-    onSubmit(formData);
-    onClose();
+    onSubmit(formData).then((res) => {
+      if (res) {
+        onClose();
+      }
+    });
   };
   const isEditing = !!initialData;
   return (

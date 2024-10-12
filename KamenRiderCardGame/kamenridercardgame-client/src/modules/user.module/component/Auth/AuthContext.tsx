@@ -11,6 +11,7 @@ interface AuthContextType {
   logout: () => void;
   isAuthenticated: boolean;
   restoreUserFromStorage: () => void;
+  isRestored: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -18,6 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string>('');
+  const [isRestored, setIsRestored] = useState<boolean>(false);
   const restoreUserFromStorage = () => {
     const storedUser = localStorage.getItem('user');
     const storedToken = AuthToken.getToken();
@@ -35,6 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   
   useEffect(() => {
     restoreUserFromStorage();
+    setIsRestored(true);
   }, []);
 
   const login = (username: string, password: string) => {
@@ -62,7 +65,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = !!user;
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, isAuthenticated , restoreUserFromStorage }}>
+    <AuthContext.Provider value={{ user, token, login, logout, isAuthenticated , restoreUserFromStorage, isRestored }}>
       {children}
     </AuthContext.Provider>
   );

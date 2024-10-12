@@ -5,6 +5,8 @@ using SharedResource.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using KamenRiderCardGame.Interfaces;
+using KamenRiderCardGame.Services;
 
 namespace KamenRiderCardGame
 {
@@ -54,9 +56,14 @@ namespace KamenRiderCardGame
                     }
                 };
             });
+
+
+            builder.Services.AddScoped<ICheckExistServcie, CheckExistServcie>();
+
             // Add services to the container.
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
@@ -77,12 +84,6 @@ namespace KamenRiderCardGame
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                //app.UseSpa(spa =>
-                //{
-                //    spa.Options.SourcePath = "../kamenridercardgame-client";
-                //    // Sử dụng lệnh npm start để khởi động React trong môi trường phát triển
-                //    spa.UseReactDevelopmentServer(npmScript: "start");
-                //});
             }
             app.UseCors(MyAllowSpecificOrigins);
             app.UseStaticFiles();

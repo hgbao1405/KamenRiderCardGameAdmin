@@ -9,6 +9,8 @@ using KamenRiderCardGame.Data;
 using SharedResource.Models;
 using GenericFileService.Files;
 using SharedResource.Middleware;
+using Microsoft.AspNetCore.Authorization;
+using KamenRiderCardGame.Interfaces;
 
 namespace KamenRiderCardGame.Controllers
 {
@@ -18,12 +20,15 @@ namespace KamenRiderCardGame.Controllers
     {
         private readonly KamenRiderCardGameContext _context;
         private readonly ILogger<LoggingMiddleware> _logger;
+        private readonly ICheckExistServcie _checkExistServcie;
 
         public FormsController(KamenRiderCardGameContext context,
-            ILogger<LoggingMiddleware> logger)
+            ILogger<LoggingMiddleware> logger,
+            ICheckExistServcie checkExistServcie)
         {
             _context = context;
             _logger = logger;
+            _checkExistServcie = checkExistServcie;
         }
 
         // GET: api/Forms
@@ -54,6 +59,7 @@ namespace KamenRiderCardGame.Controllers
         // PUT: api/Forms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutForm(int id, Form form)
         {
             _logger.LogInformation("Update form with id:{charId}", form.Id);
@@ -83,16 +89,31 @@ namespace KamenRiderCardGame.Controllers
         // POST: api/Forms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Form>> PostForm(Form form)
         {
             _logger.LogInformation("Create form with name:{charName}", form.Name);
+
+            var (character, formExist) = await _checkExistServcie.GetCharacterAndFormAsync(form.IdCharacter, form.Name);
+
+            // Kiểm tra nếu một trong hai task trả về null
+            if (character == null)
+            {
+                throw new Exception("Character not found");
+            }
+
+            if (formExist != null)
+            {
+                return BadRequest("Form with this name " + form.Name + " is already exists");
+            }
+
             try
             {
                 form.Create();
                 _context.Form.Add(form);
                 await _context.SaveChangesAsync();
-
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Create form failed");
                 return BadRequest();

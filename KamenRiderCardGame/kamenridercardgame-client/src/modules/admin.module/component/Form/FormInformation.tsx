@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import { Form } from '../../../../service/form.service';
 import {CharacterProgressBar} from '../../../../components/ui/ui';
+import LazyLoad from 'react-lazyload';
 
-const LoadingAvatarForm = () => (
-  <div className='h-[48] w-[48] rounded-full mr-3 bg-gray-500'></div>
+const LoadingAvatarForm = (name:string) => (
+  <div className='Form-image h-[48px] w-[48px]'>
+    <img src={'/placeholder.png'} alt={name} 
+            className="w-full h-full" />
+  </div>
 )
+
 const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'danger' }> = ({ 
   children, 
   variant = 'primary', 
@@ -32,10 +37,12 @@ const FormInformation: React.FC<{
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="Form-header flex items-center mb-3">
-        <img src={'https://localhost:7223/'+Form.avatar + `?height=48&width=48`} 
-        onError={(e) => e.currentTarget.src = '/placeholder.png'} alt={Form.name} 
-        className="Form-image Form-image h-12 mr-3" />
-        
+        <LazyLoad placeholder={LoadingAvatarForm(Form.name)}>
+          <img src={'https://localhost:7223/'+Form.avatar} 
+          onError={(e) => e.currentTarget.src = '/placeholder.png'} alt={Form.name} 
+          className="Form-image h-[48px]" />
+        </LazyLoad>
+
         <h2 className="Form-name flex  items-center mb-3">{Form.name}</h2>
       </div>
       {isHovered && (

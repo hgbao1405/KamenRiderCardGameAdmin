@@ -36,27 +36,30 @@ const ShowForm: FC<ShowFormsProps> = () => {
     getForms();
   }, []);
 
-  const handleAdd = async (newForm: Form) => {
+  const handleAdd: (newForm: Form) => Promise<boolean> = async (newForm: Form) => {
     console.log('Add Form');
     try {
-      MessageService.success('Form added successfully');
       const addedForm = await FormService.AddForm(newForm);
       setForms([...Forms, addedForm]);  // Update Form list
+      return true;
     } catch (err) {
       MessageService.error('Failed to add Form');
+      return false;
     }
   };
-  const handleEdit = async (updatedForm: Form) => {
+  const handleEdit: (updatedForm: Form) => Promise<boolean> = async (updatedForm: Form) => {
     try {
       const isOk = await FormService.UpdateForm(updatedForm);
       if (!isOk) {
         MessageService.error('Failed to update Form');
-        return;
+        return false;
       }
       setForms(Forms.map(char => char.id === updatedForm.id ? updatedForm : char));
       MessageService.success('Form updated successfully');
+      return true;
     } catch (err) {
       MessageService.error('Failed to update Form'+err);
+      return false;
     }
   };
 

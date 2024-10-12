@@ -6,7 +6,7 @@ import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 
 const AdminRouter: React.FC = () => {
   return (
-      <LayoutAdmin>
+      <LayoutAdmin title="Admin">
         <Routes>
           <Route element={<PrivateRoute isAdmin={true} allowedRoles={['admin']} />}>
             <Route path="/" element={<admin.AdminHome />} />

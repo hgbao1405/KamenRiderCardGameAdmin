@@ -38,7 +38,6 @@ const ShowCharacters: FC<ShowCharactersProps> = () => {
   const handleAdd = async (newCharacter: Character) => {
     console.log('Add character');
     try {
-      MessageService.success('Character added successfully');
       const addedCharacter = await CharacterService.AddCharacter(newCharacter);
       setCharacters([...characters, addedCharacter]);  // Update character list
     } catch (err) {

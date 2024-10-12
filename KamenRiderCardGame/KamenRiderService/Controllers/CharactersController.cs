@@ -30,7 +30,12 @@ namespace KamenRiderCardGame.Controllers
         public async Task<ActionResult<IEnumerable<Character>>> GetCharacter()
         {
             _logger.LogInformation("Get all characters");
-            return await _context.Character.Where(x => x.Deleted == false).ToListAsync();
+            return await _context.Character.Where(x => x.Deleted == false).Select(x=>
+            new Character{
+                Id=x.Id,Name=x.Name,Description=x.Description,Avatar=x.Avatar,
+                Attack=x.Attack,Health=x.Health,KamenRiderType=x.KamenRiderType,
+                KamenRiderTypeId=x.KamenRiderTypeId,Speed=x.Speed
+            }).ToListAsync();
         }
 
         // GET: api/Characters/5

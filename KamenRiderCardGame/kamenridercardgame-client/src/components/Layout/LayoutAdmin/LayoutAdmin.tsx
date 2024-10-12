@@ -4,17 +4,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useAuth } from '../../../modules/user.module/component/Auth/AuthContext';
 
-const routeNames:{ [key: string]: string } = {
-  '/admin': 'Admin Home',
-  '/admin/characters': 'List Characters',
-  '/admin/card-creator': 'Card Creator',
-};
-
-const LayoutAdmin: FC<{children: React.ReactNode}> = ({children}) =>
+const LayoutAdmin: FC<{children: React.ReactNode,title?:string}> = ({children,title}) =>
 {
   const { user, logout } = useAuth();
-  const location = useLocation();
-  const routeName = routeNames[location.pathname.toLowerCase()];
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate('/');
@@ -23,7 +15,7 @@ const LayoutAdmin: FC<{children: React.ReactNode}> = ({children}) =>
   return  (
     <div className="admin-layout">
             <header className="topbar fixed z-[9999] top-0 right-0 h-[70px] w-full flex items-center">
-                    <h2>{routeName}</h2>
+                    <h2>{title}</h2>
                     <div className="topbar-actions">
                         <button onClick={handleLogout}>Logout</button>
                     </div>

@@ -32,11 +32,18 @@ namespace KamenRiderCardGame.Controllers
         }
 
         // GET: api/Forms
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Form>>> GetForm()
+        [HttpGet("GetForm")]
+        public async Task<ActionResult<IEnumerable<Form>>> GetForm(int idCharacter, int idTypeForm)
         {
             _logger.LogInformation("Get all forms");
-            return await _context.Form.ToListAsync();
+
+            return await (from form in _context.Form
+                          join character in _context.Character
+                          on form.IdCharacter equals character.Id
+                          where !form.Deleted && !character.Deleted &&
+                          ((idCharacter == 0 || (form.IdCharacter ==idCharacter &&
+                          (idTypeForm == 0 || form.IdTypeForm == idTypeForm))))
+                          select form).ToListAsync();
         }
 
         // GET: api/Forms/5
@@ -64,26 +71,57 @@ namespace KamenRiderCardGame.Controllers
         {
             _logger.LogInformation("Update form with id:{charId}", form.Id);
 
-            if (!FormExists(id))
+            Form formExist = new Form();
+
+            if (!FormExists(id, out formExist))
             {
-                _logger.LogWarning("Form with id:{charId} not found", form.Id);
-                return NotFound();
+                _logger.LogWarning("Form with id:{charId} not found!", form.Id);
+                return NotFound("Form with id:" + form.Id + " not found!");
+            }
+            //không thay đổi nhân vất
+            if (form.IdCharacter != formExist.IdCharacter)
+            {
+                _logger.LogWarning("Cannot change kamen rider!");
+                return BadRequest("Cannot change kamen rider!");
+            }
+            //không thay đổi kiểu form
+            if (form.IdTypeForm != formExist.IdTypeForm)
+            {
+                _logger.LogWarning("Cannot change type form!");
+                return BadRequest("Cannot change type form!");
+            }
+            //không trùng tên form đã tồn tại
+            if (form.Name != formExist.Name)
+            {
+                var formExistTask = await _checkExistServcie.CheckExistFormAsync(form.IdCharacter, form.Name);
+                if (formExistTask != null)
+                {
+                    _logger.LogWarning("Form with name:{charName} already exists!", form.Name);
+                    return BadRequest("Form with name:" + form.Name + " already exists!");
+                }
             }
 
-            form.Update();
-            _context.Entry(form).State = EntityState.Modified;
+            formExist.Name = form.Name;
+            formExist.Attack = form.Attack;
+            formExist.HPForm = form.HPForm;
+            formExist.Description = form.Description;
+            formExist.Speed = form.Speed;
+            formExist.Kick = form.Kick;
+
+            formExist.Update();
+            _context.Entry(formExist).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
-                _logger.LogInformation("Update form with id:{charId} success", form.Id);
+                _logger.LogInformation("Update form with id:{charId} success!", form.Id);
+                return Ok("Update form with id:" + form.Id + " success!");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex,"Update form with id:{charId} failed", form.Id);
+                _logger.LogError(ex, "Update form with id:{charId} failed!", form.Id);
+                return BadRequest("Update form with id:" + form.Id + " failed!");
             }
-
-            return NoContent();
         }
 
         // POST: api/Forms
@@ -94,18 +132,21 @@ namespace KamenRiderCardGame.Controllers
         {
             _logger.LogInformation("Create form with name:{charName}", form.Name);
 
-            var characterTask=_checkExistServcie.CheckExistCharacterAsync(form.IdCharacter);
-            var formExistTask = _checkExistServcie.CheckExistFormAsync(form.IdCharacter,form.Name);
+            var characterTask = _checkExistServcie.CheckExistCharacterAsync(form.IdCharacter);
+            var formExistTask = _checkExistServcie.CheckExistFormAsync(form.IdCharacter, form.Name);
+
             await Task.WhenAll(characterTask, formExistTask);
 
-            // Kiểm tra nếu một trong hai task trả về null
-            if (characterTask == null)
+            // nhân vất không tồn tại
+            if (characterTask.Result == null)
             {
+                _logger.LogWarning("Character with id:{charId} not found", form.IdCharacter);
                 return NotFound("Character with id " + form.IdCharacter + " not found");
             }
-
-            if (formExistTask != null)
+            //tên form đã tồn tại
+            if (formExistTask.Result != null)
             {
+                _logger.LogWarning("Form with name:{charName} is already exists", form.Name);
                 return BadRequest("Form with this name " + form.Name + " is already exists");
             }
 
@@ -114,6 +155,7 @@ namespace KamenRiderCardGame.Controllers
                 form.Create();
                 _context.Form.Add(form);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation("Create form with name:{charName} success", form.Name);
             }
             catch (Exception ex)
             {
@@ -137,11 +179,19 @@ namespace KamenRiderCardGame.Controllers
             }
             form.Delete();
             //_context.Character.Remove(character);
-            _context.Entry(form).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Entry(form).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
 
-            _logger.LogInformation("Delete form with id:{charId} success", id);
-            return NoContent();
+                _logger.LogInformation("Delete form with id:{charId} success", id);
+                return Ok("Delete form with id:" + id + " success");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Delete form failed");
+                return BadRequest("Delete form failed");
+            }
         }
 
         [HttpPut("UpdateImage")]
@@ -167,6 +217,7 @@ namespace KamenRiderCardGame.Controllers
                 _logger.LogWarning("Form with id:{charId} not found", request.Id);
                 return NotFound();
             }
+
             Form.Avatar = "images/" + FileService.FileSaveToServer(request.File, "wwwroot/images/");
             Form.Update();
             _context.Entry(Form).State = EntityState.Modified;
@@ -183,9 +234,16 @@ namespace KamenRiderCardGame.Controllers
                 return BadRequest();
             }
         }
-        private bool FormExists(int id)
+
+        private bool FormExists(int id, out Form form)
         {
-            return _context.Form.Any(e => e.Id == id);
+            form = _context.Form.Find(id);
+            return form != null && form.Deleted == false;
         }
     }
+
+    public class SearchFormRecord{
+        public int idCharacter { get; set; } 
+        public int idTypeForm { get; set; }
+    };
 }

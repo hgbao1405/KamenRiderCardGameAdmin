@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import CharacterService, { Character } from "../../../../service/character.service";
 import { Button } from "../Character/CharacterInformation";
-import Select from 'react-select';
-import CharacterTypeService, { CharacterType } from "../../../../service/characterType.service";
+import Select,{ components } from 'react-select';
 import MessageService from "../../../../service/message.service";
 import './form.css';  
-import { Form } from "../../../../service/form.service";
+import { Form, SearchForm } from "../../../../service/form.service";
 import FormTypeService from "../../../../service/formtype.service";
-import e from "express";
 
 interface FormProps {
   onSubmit: (form: Form) => Promise<boolean>;
   onClose: () => void;
   initialData: Form|null;
+  searchModel: SearchForm|null;
 }
 
-const AddFormForm: React.FC<FormProps> = ({ onSubmit, onClose,initialData }) => {
+const AddFormForm: React.FC<FormProps> = ({ onSubmit, onClose,initialData,searchModel }) => {
   const [formData, setFormData] = useState<Form>({
     id: 0,
     name: '',
@@ -26,8 +25,8 @@ const AddFormForm: React.FC<FormProps> = ({ onSubmit, onClose,initialData }) => 
     kick: 0, 
     jump: 0,
     hpForm: 100,
-    idTypeForm:0,
-    idCharacter:0
+    idTypeForm: searchModel? searchModel.idTypeForm : 0,
+    idCharacter: searchModel? searchModel.idCharacter : 0
   }); 
 
   const [FormTypes, setFormTypes] = useState<any[]>([]);
@@ -41,8 +40,7 @@ const AddFormForm: React.FC<FormProps> = ({ onSubmit, onClose,initialData }) => 
   const getFormTypes = async (id: number) => {
     try {
         const result = await FormTypeService.GetListTypeFormByKamenRiderTypeId(id);
-        const options = result.map(type => ({ value: type.id, label: type.name }));
-        options.push({ value: 0, label: 'Select Form Type' });
+        const options = result.map(type => ({ value: type.id, label: type.name, Description: type.description }));
         setFormTypes(options);
     } catch (err) {
       MessageService.error('Failed to fetch kamen rider types');
@@ -119,6 +117,22 @@ useEffect(() => {
     });
   };
   const isEditing = !!initialData;
+
+  const GetDescription = (id: number) => {
+    const result = FormTypes.find(type => type.value === id);
+    return result?.Description;
+  }
+  const OptionCustom = (props: any) => {
+    return (
+      <components.Option {...props}>
+        <div data-tooltip-id="my-tooltip"
+            data-tooltip-content={GetDescription(props.data.value)}>
+            <span>{props.label}</span>
+        </div>
+      </components.Option>
+    );
+  };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg max-w-md w-full max-h-[80vh] overflow-y-auto">
@@ -132,17 +146,21 @@ useEffect(() => {
             options={Characters}
             value={Characters.find((type) => type.value === formData.idCharacter)}
             onChange={handleSelectChangeCharacter}
+            isDisabled={isEditing}
             required />
           </div>
-          <div className="mb-4">
+          <div className="mb-4" 
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content={GetDescription(formData.idTypeForm)}>
             <label className="block mb-1 font-bold text-sm" htmlFor="kamenRiderTypeId">Character type:</label>
             <Select className="basic-single w-full border-gray-300 focus:border-black-500 rounded text-sm" 
-            isDisabled={formData.idCharacter==0}
+            isDisabled={formData.idCharacter==0 || isEditing}
             isSearchable={true}
             classNamePrefix="select"
             options={FormTypes}
             value={FormTypes.find((type) => type.value === formData.idTypeForm)}
             onChange={handleSelectChangeType}
+            components={{ Option: OptionCustom }}
             required />
           </div>
           <div className="mb-4">

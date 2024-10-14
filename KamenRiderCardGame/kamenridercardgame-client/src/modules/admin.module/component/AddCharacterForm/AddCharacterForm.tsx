@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { Component, useEffect, useState } from "react";
 import { Character } from "../../../../service/character.service";
 import { Button } from "../Character/CharacterInformation";
-import Select from 'react-select';
+import Select,{ components } from 'react-select';
 import CharacterTypeService, { CharacterType } from "../../../../service/characterType.service";
 import MessageService from "../../../../service/message.service";
-import './form.css';  
-
+import './form.css';
 interface CharacterFormProps {
   onSubmit: (character: Character) => void;
   onClose: () => void;
@@ -33,8 +32,7 @@ const AddCharacterForm: React.FC<CharacterFormProps> = ({ onSubmit, onClose,init
     const getKamenRiderTypes = async () => {
       try {
         const result = await CharacterTypeService.GetAllCharacterTypes();
-        const options = result.map(type => ({ value: type.id, label: type.name }));
-        options.push({ value: 0, label: 'Select Character Type' });
+        const options = result.map(type => ({ value: type.id, label: type.name, Description: type.description }));
         setKamenRiderTypes(options);
         if(kamenRiderTypes.length>0 && initialData) {
           handleSelectChange(initialData.kamenRiderTypeId)
@@ -69,13 +67,30 @@ const AddCharacterForm: React.FC<CharacterFormProps> = ({ onSubmit, onClose,init
     onSubmit(formData);
     onClose();
   };
+  const GetDescription = (id: number) => {
+    const result = kamenRiderTypes.find(type => type.value === id);
+    return result?.Description;
+  }
+  const OptionCustom = (props: any) => {
+    return (
+      <components.Option {...props}>
+        <div data-tooltip-id="my-tooltip"
+            data-tooltip-content={GetDescription(props.data.value)}>
+            <span>{props.label}</span>
+        </div>
+      </components.Option>
+    );
+  };
+
   const isEditing = !!initialData;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg max-w-md w-full max-h-[80vh] overflow-y-auto">
         <h2 className="text-2xl font-bold mb-5 text-center">{isEditing ? 'Edit Character' : 'Add New Character'}</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+          <div className="mb-4" 
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content={GetDescription(formData.kamenRiderTypeId)}>
             <label className="block mb-1 font-bold text-sm" htmlFor="kamenRiderTypeId">Character type:</label>
             <Select className="basic-single w-full border-gray-300 focus:border-black-500 rounded text-sm" 
             isSearchable={true}
@@ -83,8 +98,13 @@ const AddCharacterForm: React.FC<CharacterFormProps> = ({ onSubmit, onClose,init
             options={kamenRiderTypes}
             value={kamenRiderTypes.find((type) => type.value === formData.kamenRiderTypeId)}
             onChange={handleSelectChange}
+            components={{Option: OptionCustom}}
+            loadingMessage={() => "Loading..."}
+            noOptionsMessage={() => "No options"}
+            isDisabled={isEditing}
             required />
           </div>
+          
           <div className="mb-4">
             <label className="block mb-1 font-bold text-sm" htmlFor="name">Name:</label>
             <input className="w-full p-2 border border-gray-300 rounded text-sm" type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />

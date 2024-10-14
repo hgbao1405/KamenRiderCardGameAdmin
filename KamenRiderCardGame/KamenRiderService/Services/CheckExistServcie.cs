@@ -16,6 +16,14 @@ namespace KamenRiderCardGame.Services
             _options = options;
         }
 
+        public Task<List<Form>> CheckExistFormByCharacterId(int id)
+        {
+            using (var context = new KamenRiderCardGameContext(_options))
+            {
+                return context.Form.Where(x => x.IdCharacter == id && x.Deleted == false).ToListAsync();
+            }
+        }
+
         public async Task<Character> CheckExistCharacterAsync(int characterId)
         {
             using (var context = new KamenRiderCardGameContext(_options))
@@ -27,7 +35,7 @@ namespace KamenRiderCardGame.Services
         {
             using (var context = new KamenRiderCardGameContext(_options))
             {
-                return await context.Form.FirstOrDefaultAsync(x => x.IdCharacter == characterId && x.Name == formName);
+                return await context.Form.FirstOrDefaultAsync(x => x.IdCharacter == characterId && x.Name == formName && x.Deleted == false);
             }
         }
     }

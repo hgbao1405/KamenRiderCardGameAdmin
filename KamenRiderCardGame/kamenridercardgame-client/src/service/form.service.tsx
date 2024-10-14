@@ -14,6 +14,10 @@ import MessageService from "./message.service";
     idTypeForm: number;
     idCharacter: number;
   }
+  export interface SearchForm{
+      idCharacter: number,
+      idTypeForm: number
+  }
  class FormService{
     private static Url="https://localhost:7223/api/Forms";
     static UpdateAvatar=async(id: number, file: File | null): Promise<Form> => {
@@ -46,12 +50,11 @@ import MessageService from "./message.service";
       throw new Error('Method not implemented.');
     }
 
-    static GetAllForms = async (): Promise<Form[]> => {
+    static GetAllForms = async (SearchForm?: SearchForm): Promise<Form[]> => {
       try {
         // G i API th m m ng nh n v  tu URL https://localhost:7223/api/Forms
-        const response = await fetch(this.Url);
+        const response = await fetch(this.Url+`/GetForm?idCharacter=${SearchForm?.idCharacter}&idTypeForm=${SearchForm?.idTypeForm}`);
 
-        // Ki m tra xem c u tr y API c  th nh c ng hay kh ng
         if (!response.ok) {
           MessageService.error('Network response was not ok');
           return Promise.reject('Network response was not ok');

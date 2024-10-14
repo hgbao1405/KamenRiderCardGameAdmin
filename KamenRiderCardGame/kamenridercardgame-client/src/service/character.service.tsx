@@ -12,7 +12,7 @@ import MessageService from "./message.service";
     kick: number;
     health: number;
     jump: number;
-    kamenRiderTypeId: Number;
+    kamenRiderTypeId: number;
   }
  class CharacterService{
     

@@ -9,6 +9,7 @@ using KamenRiderCardGame.Data;
 using GenericFileService.Files;
 using SharedResource.Middleware;
 using SharedResource.Models;
+using KamenRiderCardGame.Interfaces;
 
 namespace KamenRiderCardGame.Controllers
 {
@@ -18,11 +19,14 @@ namespace KamenRiderCardGame.Controllers
     {
         private readonly KamenRiderCardGameContext _context;
         private readonly ILogger<LoggingMiddleware> _logger;
+        private readonly ICheckExistServcie _checkExistServcie;
 
-        public CharactersController(KamenRiderCardGameContext context, ILogger<LoggingMiddleware> logger)
+        public CharactersController(KamenRiderCardGameContext context, ILogger<LoggingMiddleware> logger, 
+            ICheckExistServcie checkExistServcie)
         {
             _context = context;
             _logger = logger;
+            _checkExistServcie = checkExistServcie;
         }
 
         // GET: api/Characters
@@ -67,18 +71,17 @@ namespace KamenRiderCardGame.Controllers
                     _logger.LogWarning("Character with id:{charId} not found", id);
                     return NotFound("Character with id:" + id + " not found");
                 }
-
+                //Kiem tra xem character type co ton tai khong
                 var characterType = await _context.KamenRiderTypes.FirstOrDefaultAsync(x => x.Id == character.KamenRiderTypeId);
                 if (characterType == null)
                 {
                     _logger.LogWarning("Character Type is not found");
                     return BadRequest("Character Type is not found");
                 }
-
+                //Không thể thay đổi loại nếu danh sách form đang tồn tại
                 if (characterExist.KamenRiderTypeId != character.KamenRiderTypeId)
                 {
-                    var Forms=await _context.Form.Where(x => x.IdCharacter == character.Id && x.Deleted == false)
-                        .ToListAsync();
+                    var Forms=await _checkExistServcie.CheckExistFormByCharacterId(character.Id);
 
                     if (Forms.Count > 0)
                     {
@@ -87,7 +90,7 @@ namespace KamenRiderCardGame.Controllers
                     }
                     characterExist.KamenRiderTypeId = character.KamenRiderTypeId;
                 }
-                    
+
                 characterExist.Description = character.Description;
                 characterExist.Name = character.Name;
                 characterExist.Attack = character.Attack;
@@ -156,7 +159,6 @@ namespace KamenRiderCardGame.Controllers
         {
             try
             {
-
                 _logger.LogInformation("Delete character with id:{charId}", id);
                 var character = await _context.Character.FindAsync(id);
                 if (character == null || character.Deleted == true)
@@ -182,7 +184,7 @@ namespace KamenRiderCardGame.Controllers
 
         private bool CharacterExists(int id, out Character character)
         {
-            character = _context.Character.Find(id);
+            character = _context.Character.FirstOrDefault(x => x.Id == id);
             return character != null && character.Deleted == false;
         }
 

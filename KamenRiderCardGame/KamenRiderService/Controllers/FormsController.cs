@@ -70,7 +70,15 @@ namespace KamenRiderCardGame.Controllers
         public async Task<IActionResult> PutForm(int id, Form form)
         {
             _logger.LogInformation("Update form with id:{charId}", form.Id);
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("Form with id:{charId} is not valid", id);
 
+                return BadRequest(ModelState.Values
+                        .SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage)
+                        .ToArray());
+            }
             Form formExist = new Form();
 
             if (!FormExists(id, out formExist))
@@ -78,7 +86,7 @@ namespace KamenRiderCardGame.Controllers
                 _logger.LogWarning("Form with id:{charId} not found!", form.Id);
                 return NotFound("Form with id:" + form.Id + " not found!");
             }
-            //không thay đổi nhân vất
+            //không thay đổi nhân vật
             if (form.IdCharacter != formExist.IdCharacter)
             {
                 _logger.LogWarning("Cannot change kamen rider!");
@@ -131,6 +139,16 @@ namespace KamenRiderCardGame.Controllers
         public async Task<ActionResult<Form>> PostForm(Form form)
         {
             _logger.LogInformation("Create form with name:{charName}", form.Name);
+
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("Form is not valid");
+
+                return BadRequest(ModelState.Values
+                        .SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage)
+                        .ToArray());
+            }
 
             var characterTask = _checkExistServcie.CheckExistCharacterAsync(form.IdCharacter);
             var formExistTask = _checkExistServcie.CheckExistFormAsync(form.IdCharacter, form.Name);

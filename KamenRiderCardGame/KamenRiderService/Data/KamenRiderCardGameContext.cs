@@ -32,14 +32,15 @@ namespace KamenRiderCardGame.Data
                 {
                     Id = 1,
                     IdCharacter = 1,
-                    Name="Tatoba",
-                    IdTypeForm=2,
+                    Name = "Tatoba",
+                    IdTypeForm = 2,
                     Avatar = "images/Tatoba.png",
-                    Description= "Tatoba Combo also known as the Multi Combo " +
+                    Description = "Tatoba Combo also known as the Multi Combo " +
                     " is the default combination of OOO accessed using " +
                     "the Taka, Tora, & Batta Core Medals.",
-                    Attack=30,
-                    Kick=12
+                    Attack = 30,
+                    Kick = 12,
+                    FormKeyWordNumber = 0
                 }
                 );
             builder.Entity<KamenRiderType>().HasData(
@@ -135,7 +136,9 @@ namespace KamenRiderCardGame.Data
                     Avatar = "images/OOO.png",
                     Description="OOO",
                     KamenRiderTypeId=1,
-                    CardAttrBasic = cardAttrHtml.BasicAttr()
+                    CardAttrBasic = cardAttrHtml.BasicAttr(),
+                    numberComponentForm = 3,
+                    keyword="head,arm,leg"
                 },
                 new Character
                 {

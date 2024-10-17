@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedResource.Validates;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -31,5 +32,11 @@ namespace SharedResource.Models
 
         [ForeignKey("IdTypeForm")]
         public virtual TypeForm? TypeForm { get; set; }
+
+        [FormKeyWordValidate("IdTypeForm")]
+        public int FormKeyWordNumber { get; set; } = 0;
+        
+        [ComponentFormIdValidate("IdTypeForm")]
+        public string? ComponentFormId { get; set; }
     }
 }

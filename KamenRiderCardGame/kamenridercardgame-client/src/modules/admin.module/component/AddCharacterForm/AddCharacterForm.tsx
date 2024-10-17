@@ -5,8 +5,9 @@ import Select,{ components } from 'react-select';
 import CharacterTypeService, { CharacterType } from "../../../../service/characterType.service";
 import MessageService from "../../../../service/message.service";
 import './form.css';
+import TagInput from "../../../../components/ui/ui";
 interface CharacterFormProps {
-  onSubmit: (character: Character) => void;
+  onSubmit: (character: Character) => Promise<boolean>;
   onClose: () => void;
   initialData: Character|null;
 }
@@ -22,11 +23,24 @@ const AddCharacterForm: React.FC<CharacterFormProps> = ({ onSubmit, onClose,init
     kick: 50, 
     jump: 50,
     health: 100,
-    kamenRiderTypeId: 0
+    kamenRiderTypeId: 0,
+    numberComponentForm: 0,
+    keyword: '',
   }); 
 
   const [kamenRiderTypes, setKamenRiderTypes] = useState<any[]>([]);
+  const [keywords, setKeywords] = useState<string[]>([]);
   
+  useEffect(() => {
+    if(formData.kamenRiderTypeId!=1) {
+      setKeywords([]);
+    }
+  }, [formData.kamenRiderTypeId]);
+
+  useEffect(() => {
+    formData.numberComponentForm = keywords.length;
+    formData.keyword = keywords.join(',');
+  }, [keywords]);
 
   useEffect(() => {
     const getKamenRiderTypes = async () => {
@@ -48,7 +62,9 @@ const AddCharacterForm: React.FC<CharacterFormProps> = ({ onSubmit, onClose,init
       }
     }
     getKamenRiderTypes();
-    
+
+    if(initialData)
+      setKeywords(initialData && initialData.keyword ? initialData.keyword.split(',') : []);
   }, [initialData]);
 
   const handleSelectChange = (selectedOption: any) => {
@@ -63,9 +79,11 @@ const AddCharacterForm: React.FC<CharacterFormProps> = ({ onSubmit, onClose,init
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    onSubmit(formData);
-    onClose();
+    onSubmit(formData).then((res) => {
+      if (res) {
+        onClose();
+      }
+    });
   };
   const GetDescription = (id: number) => {
     const result = kamenRiderTypes.find(type => type.value === id);
@@ -104,7 +122,15 @@ const AddCharacterForm: React.FC<CharacterFormProps> = ({ onSubmit, onClose,init
             isDisabled={isEditing}
             required />
           </div>
-          
+          {
+            formData.kamenRiderTypeId==1 &&
+            <div className="mb-4" 
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content="Set keywords for this character to binding to the component form">
+              <label className="block mb-1 font-bold text-sm" htmlFor="keyword">Keywords:</label>
+              <TagInput onChange={setKeywords} keyword={formData.keyword} disable={isEditing} />
+            </div>
+          }
           <div className="mb-4">
             <label className="block mb-1 font-bold text-sm" htmlFor="name">Name:</label>
             <input className="w-full p-2 border border-gray-300 rounded text-sm" type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
@@ -116,7 +142,8 @@ const AddCharacterForm: React.FC<CharacterFormProps> = ({ onSubmit, onClose,init
           <div className="mb-4">
               <label className="block mb-1 font-bold text-sm" htmlFor="health">Health:</label>
               <input className="w-full p-2 border border-gray-300 rounded text-sm" type="number" step={0.1} id="health" name="health" min="0" max="1000" value={formData.health} onChange={handleChange} required />
-            </div>
+          </div>
+          
           <div className="flex justify-between gap-3">
             <div className="w-full">
               <label className="block mb-1 font-bold text-sm" htmlFor="speed">Speed:</label>

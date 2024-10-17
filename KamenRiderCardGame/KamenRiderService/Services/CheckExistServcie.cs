@@ -31,6 +31,7 @@ namespace KamenRiderCardGame.Services
                 return await context.Character.FirstOrDefaultAsync(x => x.Id == characterId && x.Deleted == false);
             }
         }
+
         public async Task<Form> CheckExistFormAsync(int characterId, string formName)
         {
             using (var context = new KamenRiderCardGameContext(_options))

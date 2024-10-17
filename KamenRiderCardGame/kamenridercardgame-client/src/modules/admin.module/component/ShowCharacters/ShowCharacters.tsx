@@ -35,28 +35,59 @@ const ShowCharacters: FC<ShowCharactersProps> = () => {
     getCharacters();
   }, []);
 
-  const handleAdd = async (newCharacter: Character) => {
-    console.log('Add character');
+  const handleAdd: (newCharacter: Character) => Promise<boolean> = async (newCharacter: Character) => {
+    console.log('Add Form');
     try {
       const addedCharacter = await CharacterService.AddCharacter(newCharacter);
-      setCharacters([...characters, addedCharacter]);  // Update character list
+
+      if (addedCharacter) {
+        setCharacters([...characters, addedCharacter]);  // Update Form list
+        return true;
+      }
     } catch (err) {
-      MessageService.error('Failed to add character');
+      MessageService.error('Failed to add Form');
     }
+    
+    return false;
   };
-  const handleEdit = async (updatedCharacter: Character) => {
+  const handleEdit: (updatedCharacter: Character) => Promise<boolean> = async (updatedCharacter: Character) => {
     try {
       const isOk = await CharacterService.UpdateCharacter(updatedCharacter);
       if (!isOk) {
         MessageService.error('Failed to update character');
-        return;
+        return false;
       }
       setCharacters(characters.map(char => char.id === updatedCharacter.id ? updatedCharacter : char));
       MessageService.success('Character updated successfully');
+      return true;
     } catch (err) {
       MessageService.error('Failed to update character'+err);
+      return false;
     }
   };
+
+  // const handleAdd = async (newCharacter: Character) => {
+  //   console.log('Add character');
+  //   try {
+  //     const addedCharacter = await CharacterService.AddCharacter(newCharacter);
+  //     setCharacters([...characters, addedCharacter]);  // Update character list
+  //   } catch (err) {
+  //     MessageService.error('Failed to add character');
+  //   }
+  // };
+  // const handleEdit = async (updatedCharacter: Character) => {
+  //   try {
+  //     const isOk = await CharacterService.UpdateCharacter(updatedCharacter);
+  //     if (!isOk) {
+  //       MessageService.error('Failed to update character');
+  //       return;
+  //     }
+  //     setCharacters(characters.map(char => char.id === updatedCharacter.id ? updatedCharacter : char));
+  //     MessageService.success('Character updated successfully');
+  //   } catch (err) {
+  //     MessageService.error('Failed to update character'+err);
+  //   }
+  // };
 
   const handleUpdateAvatar = async (id: number, avatarFile: File | null) => {
     try {

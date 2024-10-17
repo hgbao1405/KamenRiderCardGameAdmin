@@ -38,7 +38,8 @@ namespace KamenRiderCardGame.Controllers
             new Character{
                 Id=x.Id,Name=x.Name,Description=x.Description,Avatar=x.Avatar,
                 Attack=x.Attack,Health=x.Health,KamenRiderType=x.KamenRiderType,
-                KamenRiderTypeId=x.KamenRiderTypeId,Speed=x.Speed
+                KamenRiderTypeId=x.KamenRiderTypeId,Speed=x.Speed,
+                keyword=x.keyword
             }).ToListAsync();
         }
 
@@ -63,6 +64,14 @@ namespace KamenRiderCardGame.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCharacter(int id, [FromBody] Character character)
         {
+            if (!ModelState.IsValid) {
+                _logger.LogWarning("Character with id:{charId} is not valid", id);
+
+                return BadRequest(ModelState.Values
+                        .SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage)
+                        .ToArray());
+            } 
             try
             {
                 Character characterExist=new Character();
@@ -98,6 +107,8 @@ namespace KamenRiderCardGame.Controllers
                 characterExist.Kick = character.Kick;
                 characterExist.Health = character.Health;
                 characterExist.Speed = character.Speed;
+                characterExist.numberComponentForm = character.numberComponentForm;
+                characterExist.keyword = character.keyword;
 
                 if (character.CardAttrBasic != null)
                 {
@@ -133,6 +144,15 @@ namespace KamenRiderCardGame.Controllers
         [HttpPost]
         public async Task<ActionResult<Character>> PostCharacter([FromBody] Character character)
         {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("Character is not valid");
+
+                return BadRequest(ModelState.Values
+                        .SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage)
+                        .ToArray());
+            }
             try
             {
                 _logger.LogInformation("Create character with id:{charId}", character.Id);

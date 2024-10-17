@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SharedResource.Models;
+using SharedResource.Validates;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
@@ -27,7 +28,7 @@ namespace SharedResource.Models
         {
             get
             {
-                return JsonCardAttrBasic==null ? null : JsonConvert.DeserializeObject<CardAttrHtml>(JsonCardAttrBasic);
+                return JsonCardAttrBasic==null ? new CardAttrHtml().BasicAttr(): JsonConvert.DeserializeObject<CardAttrHtml>(JsonCardAttrBasic);
             }
             set
             {
@@ -35,6 +36,12 @@ namespace SharedResource.Models
             }
         }
         public string? JsonCardAttrBasic { get; set; }
+        //số component của 1 mutiple form
+        [NumberComponentByKamenRider("KamenRiderTypeId")]
+        public int numberComponentForm { get; set; } = 0;
+        //các từ khóa của mutiple form vd: head, arm, leg
+        [CommaLimit("numberComponentForm")]
+        public string? keyword { get; set; }
     }
 
     public class CardAttrHtml

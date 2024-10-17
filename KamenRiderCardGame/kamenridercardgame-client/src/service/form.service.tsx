@@ -13,6 +13,8 @@ import MessageService from "./message.service";
     jump: number;
     idTypeForm: number;
     idCharacter: number;
+    componentFormId: string|null;
+    formKeyWordNumber: number;
   }
   export interface SearchForm{
       idCharacter: number,

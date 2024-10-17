@@ -26,7 +26,9 @@ const AddFormForm: React.FC<FormProps> = ({ onSubmit, onClose,initialData,search
     jump: 0,
     hpForm: 100,
     idTypeForm: searchModel? searchModel.idTypeForm : 0,
-    idCharacter: searchModel? searchModel.idCharacter : 0
+    idCharacter: searchModel? searchModel.idCharacter : 0,
+    componentFormId: '',
+    formKeyWordNumber: 0
   }); 
 
   const [FormTypes, setFormTypes] = useState<any[]>([]);

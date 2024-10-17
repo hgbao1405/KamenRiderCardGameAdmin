@@ -13,6 +13,9 @@ import MessageService from "./message.service";
     health: number;
     jump: number;
     kamenRiderTypeId: number;
+    kamenRiderType?:any;
+    numberComponentForm: number;
+    keyword: string|null;
   }
  class CharacterService{
     

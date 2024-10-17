@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Character } from '../../../../service/character.service';
-import {CharacterProgressBar} from '../../../../components/ui/ui';
+import {CharacterProgressBar, Tag2} from '../../../../components/ui/ui';
 
 const LoadingAvatarCharacter = () => (
   <div className='h-[48] w-[48] rounded-full mr-3 bg-gray-500'></div>
@@ -35,9 +35,12 @@ const CharacterInformation: React.FC<{
         <img src={'https://localhost:7223/'+character.avatar + `?height=48&width=48`} 
         onError={(e) => e.currentTarget.src = '/placeholder.png'} alt={character.name} 
         className="character-image character-image w-12 h-12 rounded-full mr-3" />
-        
-        <h2 className="character-name flex  items-center mb-3">{character.name}</h2>
-      </div>
+      <div className="character-name items-center mb-3">
+        <h2 >{character.name}</h2>
+        <Tag2 clasName="text-xs" tag={character.kamenRiderType?.name}/>
+
+      </div>  
+    </div>
       {isHovered && (
         <>
           <p className="character-description text-gray-500 mb-3 text-sm">{character.description}</p>

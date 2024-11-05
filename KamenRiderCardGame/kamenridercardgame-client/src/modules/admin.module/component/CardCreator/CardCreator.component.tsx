@@ -1,56 +1,24 @@
 import React, { useState, useCallback, useEffect } from "react";
 import DraggableFlippableCard from "./DraggableFlippableCard.component";
 import { Cloudinary } from '@cloudinary/url-gen';
-import AttributeEditor, { HtmlStyle } from "./AttributeEditor";
-import {MdOutlineMenu} from 'react-icons/md';
+import AttributeEditor from "./AttributeEditor";
+import CardLayoutService, { HtmlStyle } from "../../../../service/cardLayout.service";
 
-const createBasicAttr = (avatar: string, description: string, name: string): HtmlStyle[] => ([
-  {
-    attr: {
-      Type: "text",
-      Value: name,
-    },
-    color: "#ffffff",
-    fontSize: "20px",
-    widthPercent: 100,
-    height: 30,
-    top: 10,
-    left: 0,
-    isCenter: true,
-  },
-  {
-    attr: {
-      Type: "img",
-      Value: avatar
-    },
-    width: 180,
-    height: 180,
-    top: 40,
-    left: 60,
-  },
-  {
-    attr: {
-      Type: "text",
-      Value: description,
-    },
-    widthPercent: 80,
-    height: 160,
-    top: 250,
-    left: 30,
-    color: "#000000",
-    fontSize: "14px",
-  }
-]);
 const CardCreator: React.FC = () => {
   const cld = new Cloudinary({ cloud: { cloudName: 'dqnqa1sjb' } });
 
   const [frontImage, setFrontImage] = useState<string | null>(null);
   const [backImage, setBackImage] = useState<string | null>(null);
-  const [attr, setAttr] = useState<HtmlStyle[]>(createBasicAttr(
-    cld.image('cld-sample-3').toURL(),
-    "This is a description of John Doe. You can drag and reposition this text.",
-    "John Doe"
-  ));
+  const [attr, setAttr] = useState<HtmlStyle[]>([]);
+  const [idCharacter, setIdCharacter] = useState<number>(1);
+
+  useEffect(() => {
+    const getLayout = async () => {
+      const layout = await CardLayoutService.GetCardLayout(idCharacter);
+      setAttr(layout);
+    }
+    getLayout();
+  },[idCharacter]);
 
   const handleAttributeChange = useCallback((index: number, newStyle: HtmlStyle) => {
     setAttr(prev => prev.map((item, i) => i === index ? newStyle : item));

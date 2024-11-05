@@ -22,6 +22,7 @@ namespace KamenRiderCardGame.Data
 
         public DbSet<SharedResource.Models.Form> Form { get; set; } = default!;
         public DbSet<SharedResource.Models.TypeForm> TypeForm { get; set; } = default!;
+        public DbSet<UpdateCalendar> updateCalendars { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

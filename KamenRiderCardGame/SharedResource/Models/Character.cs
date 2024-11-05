@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace SharedResource.Models
 {
-    public class Character : ManagementObject
+    public class Character : ManagementObject<CharacterUpdate>
     {
         [Key]
         public int Id { get; set; }
@@ -44,9 +44,38 @@ namespace SharedResource.Models
         public string? keyword { get; set; }
     }
 
+    public class CharacterUpdate: UpdateObject<Character>
+    {
+        public int Health { get; set; }
+        public float? Attack { get; set; }
+        public float? Kick { get; set; }
+        public float? Speed { get; set; }
+        public float? Jump { get; set; }
+        [AllowNull]
+        public string? Avatar { get; set; }
+
+        public override void Update(Character _new, Character _old, int idUpdateCalendar)
+        {
+            base.Update(_new, _old, idUpdateCalendar);
+            if (_new != _old)
+            {
+                if (_new.Name != _old.Name) Name = _new.Name;
+                if (_new.Health != _old.Health) Health = _new.Health;
+                if (_new.Attack != _old.Attack) Attack = _new.Attack;
+                if (_new.Kick != _old.Kick) Kick = _new.Kick;
+                if (_new.Speed != _old.Speed) Speed = _new.Speed;
+                if (_new.Jump != _old.Jump) Jump = _new.Jump;
+                if (_new.Avatar != _old.Avatar) Avatar = _new.Avatar;
+            }
+        }
+    }
+
     public class CardAttrHtml
     {
+        [HtmlStyeValid]
         public ICollection<HtmlStye> attrs { get; set; }
+        public string? backImage { get; set; }
+        public string? frontImage { get; set; }
 
         public CardAttrHtml() { }
         
@@ -63,7 +92,8 @@ namespace SharedResource.Models
             htmlStye.Add(AttrHtml.basicDescription());
 
             cardAttrHtml.attrs = htmlStye;
-
+            cardAttrHtml.frontImage = "https://res.cloudinary.com/dqnqa1sjb/image/upload/cld-sample-5?_a=DATAg1AAZAA0";
+            cardAttrHtml.backImage = "https://res.cloudinary.com/dqnqa1sjb/image/upload/cld-sample-4?_a=DATAg1AAZAA0";
             return cardAttrHtml;
         }
 
@@ -85,7 +115,7 @@ namespace SharedResource.Models
         public HtmlStye basicName()
         {
             HtmlStye h=new HtmlStye();
-            h.attr = new Attr() { Type = "text", Value = "Name" };
+            h.attr = new Attr() { Type = "text",Name="name", Value = "Name" };
             h.color = "#ffffff";
             h.fontSize = "20px";
             h.widthPercent = 100;
@@ -97,17 +127,17 @@ namespace SharedResource.Models
         public HtmlStye basicAvatar()
         {
             HtmlStye h = new HtmlStye();
-            h.attr = new Attr() { Type = "image", Value = "https://res.cloudinary.com/dqnqa1sjb/image/upload/cld-sample-3?_a=DATAg1AAZAA0" };
+            h.attr = new Attr() { Type = "image",Name="avatar", Value = "https://res.cloudinary.com/dqnqa1sjb/image/upload/cld-sample-3?_a=DATAg1AAZAA0" };
             h.width=180;
             h.height=180;
             h.top = 40;
-            h.isCenter = true;
+            h.left = 10;
             return h;
         }
         public HtmlStye basicDescription()
         {
             HtmlStye h = new HtmlStye();
-            h.attr = new Attr() { Type = "text", Value = "Description" };
+            h.attr = new Attr() { Type = "text",Name= "description", Value = "Description" };
             h.color = "#ffffff";
             h.widthPercent = 100;
             h.height = 100;
@@ -119,6 +149,7 @@ namespace SharedResource.Models
     public class Attr
     {
         public string? Type { get; set; }
+        public string? Name {  get; set; }
         public string? Value { get; set; }
     }
 }

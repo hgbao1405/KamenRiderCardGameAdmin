@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace SharedResource.Models
+namespace SharedResource.Validates
 {
     public class ComponentFormIdValidateAttribute : ValidationAttribute
     {
@@ -25,8 +25,8 @@ namespace SharedResource.Models
 
             var IdTypeFormValue = (int)IdTypeForm.GetValue(validationContext.ObjectInstance);
             var ComponentFormId = (string)value;
-            var Formid=ComponentFormId.Split(",").ToArray();
-            
+            var Formid = ComponentFormId.Split(",").ToArray();
+
             switch (IdTypeFormValue)
             {
                 // Component type Form

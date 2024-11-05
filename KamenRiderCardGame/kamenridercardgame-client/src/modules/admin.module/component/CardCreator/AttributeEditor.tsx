@@ -1,22 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
-export interface HtmlStyle {
-  attr: attr;
-  isCenter?: boolean;
-  top?: number;
-  left?: number;
-  width?: number;
-  height?: number;
-  widthPercent?: number;
-  heightPercent?: number;
-  color?: string;
-  fontSize?: string;
-}
-
-interface attr {
-  Type: 'text' | 'img';
-  Value: string;
-}
+import { HtmlStyle } from '../../../../service/cardLayout.service';
 
 type UnitType = 'px' | 'percent';
 
@@ -38,8 +21,8 @@ export default function AttributeEditor({ initialStyle, onSave, isOpen}: Attribu
   useEffect(() => {
     setStyle(initialStyle);
     setUnits({
-      width: initialStyle.widthPercent !== undefined ? 'percent' : 'px',
-      height: initialStyle.heightPercent !== undefined ? 'percent' : 'px',
+      width: initialStyle.widthPercent !== null || undefined? 'percent' : 'px',
+      height: initialStyle.heightPercent !== null || undefined? 'percent' : 'px',
     });
   }, [initialStyle]);
 
@@ -134,8 +117,8 @@ export default function AttributeEditor({ initialStyle, onSave, isOpen}: Attribu
         <div className="space-y-4">
             <span className='w-full'>
               {
-                style.attr?.Type==="text"?`Text:${style.attr.Value}`:
-                (<img className='h-[20px] object-cover' src={style.attr.Value} alt="Element" />)
+                style.attr?.type==="text"?`Text:${style.attr.value}`:
+                (<img className='h-[20px] object-cover' src={style.attr.value} alt="Element" />)
               }
             </span>
         </div>}
@@ -145,11 +128,11 @@ export default function AttributeEditor({ initialStyle, onSave, isOpen}: Attribu
           <label htmlFor="attrType" className="block mb-2 text-sm font-bold">Type</label>
           <select 
             id="attrType"
-            value={style.attr.Type} 
+            value={style.attr.type} 
             onChange={(e) => handleChange('attr', { ...style.attr, Type: e.target.value as 'text' | 'img' })}
             className="px-3 py-2 border rounded-md w-full">
             <option value="text">Text</option>
-            <option value="img">Image</option>
+            <option value="image">Image</option>
           </select>
         </div>
         <div className='w-full'>
@@ -157,8 +140,8 @@ export default function AttributeEditor({ initialStyle, onSave, isOpen}: Attribu
           <input
             type="text"
             id="attrValue"
-            value={style.attr.Value}
-            onChange={(e) => handleChange('attr', { ...style.attr, Value: e.target.value })}
+            value={style.attr.value}
+            onChange={(e) => handleChange('attr', { ...style.attr, value: e.target.value })}
             className="px-3 py-2 border rounded-md w-full"
           />
         </div>
@@ -167,10 +150,10 @@ export default function AttributeEditor({ initialStyle, onSave, isOpen}: Attribu
           {renderInput('left', 'Left', 'number',true)}
           {renderInput('width', 'Width', 'number')}
           {renderInput('height', 'Height', 'number')}
-          {style.attr.Type === 'text' && renderInput('color', 'Color', 'color')}
-          {style.attr.Type === 'text' && renderInput('fontSize', 'Font Size')}
+          {style.attr.type === 'text' && renderInput('color', 'Color', 'color')}
+          {style.attr.type === 'text' && renderInput('fontSize', 'Font Size')}
         </div>
-        {style.attr.Type === 'text' && (<div className="flex items-center space-x-2 w-full">
+        {style.attr.type === 'text' && (<div className="flex items-center space-x-2 w-full">
           <label htmlFor="isCenter" className="text-sm font-bold">Center</label>
           <input
             type="checkbox"
@@ -180,11 +163,9 @@ export default function AttributeEditor({ initialStyle, onSave, isOpen}: Attribu
             className="form-checkbox h-5 w-5"
           />
         </div>)}
-        <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Save Changes</button>
+        <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Changes</button>
       </form>
-      )}
-      
+      )}      
     </div>
-    
   );
 }

@@ -16,7 +16,7 @@ namespace KamenRiderCardGame.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FormsController : ControllerBase
+    public class FormsController : PublishController<Form>
     {
         private readonly KamenRiderCardGameContext _context;
         private readonly ILogger<LoggingMiddleware> _logger;
@@ -24,7 +24,7 @@ namespace KamenRiderCardGame.Controllers
 
         public FormsController(KamenRiderCardGameContext context,
             ILogger<LoggingMiddleware> logger,
-            ICheckExistServcie checkExistServcie)
+            ICheckExistServcie checkExistServcie):base(context, logger)
         {
             _context = context;
             _logger = logger;

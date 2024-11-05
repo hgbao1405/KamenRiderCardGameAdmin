@@ -28,7 +28,7 @@ namespace KamenRiderCardGame.Controllers
         }
 
         // GET: api/CardCreator
-        [HttpGet("{id}")]
+        [HttpGet("[action]/{id}")]
         public async Task<ActionResult<CardAttrHtml>> GetCardLayout(int id)
         {
             Character character = await _checkExistServcie.CheckExistCharacterAsync(id);
@@ -38,6 +38,7 @@ namespace KamenRiderCardGame.Controllers
                 _logger.LogWarning("Character with id:{charId} not found", id);
                 return NotFound();
             }
+
             //Nếu chưa có layout thì tạo layout mới
             if(character.CardAttrBasic == null) {
                 character.CardAttrBasic = new CardAttrHtml().BasicAttr();

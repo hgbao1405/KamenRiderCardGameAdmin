@@ -10,19 +10,20 @@ using GenericFileService.Files;
 using SharedResource.Middleware;
 using SharedResource.Models;
 using KamenRiderCardGame.Interfaces;
+using System.Globalization;
 
 namespace KamenRiderCardGame.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CharactersController : ControllerBase
+    public class CharactersController : PublishController<Character>
     {
         private readonly KamenRiderCardGameContext _context;
         private readonly ILogger<LoggingMiddleware> _logger;
         private readonly ICheckExistServcie _checkExistServcie;
 
         public CharactersController(KamenRiderCardGameContext context, ILogger<LoggingMiddleware> logger, 
-            ICheckExistServcie checkExistServcie)
+            ICheckExistServcie checkExistServcie):base(context, logger)
         {
             _context = context;
             _logger = logger;
@@ -62,7 +63,7 @@ namespace KamenRiderCardGame.Controllers
         // PUT: api/Characters/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCharacter(int id, [FromBody] Character character)
+        public async Task<IActionResult> PutCharacter(int id, [FromBody] Character character, [FromQuery]int? idUpdateCaledar)
         {
             if (!ModelState.IsValid) {
                 _logger.LogWarning("Character with id:{charId} is not valid", id);
@@ -99,16 +100,42 @@ namespace KamenRiderCardGame.Controllers
                     }
                     characterExist.KamenRiderTypeId = character.KamenRiderTypeId;
                 }
+                //Nếu nhân vật đã publish thì thêm lịch để thay đổi
+                if (characterExist.IsPubish)
+                {
+                    if (idUpdateCaledar == null)
+                    {
+                        _logger.LogWarning("Character with id:{charId} is published, Update failed", id);
+                        return BadRequest("Character is published, Update failed");
+                    }
+                    UpdateCalendar update = _context.updateCalendars.FirstOrDefault(x => x.Id == idUpdateCaledar);
+                    if (update == null)
+                    {
+                        _logger.LogWarning("Cannt find this calendar update!!!");
+                        return BadRequest("Cannt find this calendar update!!!");
+                    }
+                    //Quá ngày update
+                    if(update.StartTime < DateTime.Now)
+                    {
+                        _logger.LogWarning("Update in date:{date} is passed", update.StartTime);
+                        return BadRequest("Update in date:" + update.StartTime + " is passed");
+                    }
 
-                characterExist.Description = character.Description;
-                characterExist.Name = character.Name;
-                characterExist.Attack = character.Attack;
-                characterExist.Jump = character.Jump;
-                characterExist.Kick = character.Kick;
-                characterExist.Health = character.Health;
-                characterExist.Speed = character.Speed;
-                characterExist.numberComponentForm = character.numberComponentForm;
-                characterExist.keyword = character.keyword;
+                    _logger.LogWarning("Character with id:{charId} is published, Update in date:{date}", id, DateTime.Now);
+                    characterExist.UpdateAttr.Update(characterExist, character, idUpdateCaledar.Value);
+                }
+                else
+                {
+                    characterExist.Description = character.Description;
+                    characterExist.Name = character.Name;
+                    characterExist.Attack = character.Attack;
+                    characterExist.Jump = character.Jump;
+                    characterExist.Kick = character.Kick;
+                    characterExist.Health = character.Health;
+                    characterExist.Speed = character.Speed;
+                    characterExist.numberComponentForm = character.numberComponentForm;
+                    characterExist.keyword = character.keyword;
+                }
 
                 if (character.CardAttrBasic != null)
                 {

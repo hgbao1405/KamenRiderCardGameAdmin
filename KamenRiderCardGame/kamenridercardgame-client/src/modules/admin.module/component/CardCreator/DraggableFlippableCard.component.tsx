@@ -1,12 +1,7 @@
 import React, { useState, useRef, useEffect, RefCallback } from 'react';
 import { useDrag, useDrop, DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { HtmlStyle } from './AttributeEditor';
-
-interface attr {
-  Type: 'text' | 'img';
-  Value: string;
-}
+import { HtmlStyle } from '../../../../service/cardLayout.service';
 
 interface CardProps {
   frontImage: string;
@@ -44,8 +39,8 @@ const DraggableElement: React.FC<{
 
   return (
     <div ref={drag} style={elementStyle} id={`${index}`}>
-      {style.attr.Type === 'text' && <div className='font-bold'>{style.attr.Value}</div>}
-      {style.attr.Type === 'img' && <img className='w-full h-full object-cover' src={style.attr.Value} alt="Element" />}
+      {style.attr.type === 'text' && <div className='font-bold'>{style.attr.value}</div>}
+      {style.attr.type === 'image' && <img className='w-full h-full object-cover' src={style.attr.value} alt="Element" />}
     </div>
   );
 };
